@@ -21,15 +21,14 @@
 
   var content = {
     fruits: [
-      { id: 'apple', name: '苹果', unit: '袋', prices: { original: 23, special: 21, member: 19 } },
-      { id: 'orange', name: '橙子', unit: '袋', prices: { original: 18, special: 16, member: 15 } },
-      { id: 'pear', name: '梨', unit: '袋', prices: { original: 36, special: 32, member: 30 } }
+      { id: 'apple', name: '苹果', unit: '袋', prices: { original: 23 } }
     ],
     presets: [
-      { id: 'original', label: '原价' },
-      { id: 'special', label: '今日特价' },
-      { id: 'member', label: '会员价' }
+      { id: 'original', label: '原价' }
     ],
+    // Amount is in integer jiao. Change only 18 to 29 for the alternative task.
+    // Whole-yuan amounts are intentionally excluded from this transfer activity.
+    transfer: { fruitId: 'orange', name: '橙子', unit: '袋', amount: 18 },
     tasks: {
       1: {
         title: '说清价钱',
@@ -172,6 +171,128 @@
         }
       }
     },
+    practice: {
+      shuffleDefault: false,
+      groups: [
+        { id: 'A', title: '说清组成', review: '一条单位条代表1元，每小格是0.1元；先看整元，再看角的部分。' },
+        { id: 'B', title: '比价', review: '比较同品种、同品质、同样一袋的苹果，先比整元，再比角；2.3元比2.8元少5角。' },
+        { id: 'C', title: '长度与生活', review: '0.7米是7个0.1米；说生活例子时，要把数量、单位和用途一起说清楚。' }
+      ],
+      questions: [
+        {
+          id: 'A1', group: 'A', prompt: '0.1 元等于多少角？',
+          options: [
+            { id: 'a', text: '0.1 角' },
+            { id: 'b', text: '1 角' },
+            { id: 'c', text: '10 角' }
+          ],
+          correctId: 'b',
+          hint: '想一想：1元平均分成10份，每份与“角”有什么关系？',
+          explanation: '1元等于10角，平均分成10份，每份是0.1元，也就是1角。'
+        },
+        {
+          id: 'A2', group: 'A', prompt: '2.3 元里有几个 1 元、几个 0.1 元？',
+          options: [
+            { id: 'a', text: '2 个 1 元、3 个 0.1 元' },
+            { id: 'b', text: '3 个 1 元、2 个 0.1 元' },
+            { id: 'c', text: '2 个 1 元、8 个 0.1 元' }
+          ],
+          correctId: 'a',
+          hint: '先看有几个完整的1元，再看不足1元的部分。',
+          explanation: '2.3元是2元3角，也就是2个1元加3个0.1元。'
+        },
+        {
+          id: 'A3', group: 'A', prompt: '2.3 元中“3”表示什么？',
+          options: [
+            { id: 'a', text: '3 分' },
+            { id: 'b', text: '3 元' },
+            { id: 'c', text: '3 个 0.1 元，也就是 3 角' }
+          ],
+          correctId: 'c',
+          hint: '“3”在小数点后。请回想不足1元的单位条中，每格表示什么。',
+          explanation: '小数点后的“3”表示3个0.1元，也就是3角。'
+        },
+        {
+          id: 'A4', group: 'A', prompt: '图上涂了几格，表示多少钱？',
+          diagram: { type: 'money', amount: 3 },
+          options: [
+            { id: 'a', text: '3 格，0.3 元' },
+            { id: 'b', text: '7 格，0.7 元' },
+            { id: 'c', text: '3 格，0.1 元' }
+          ],
+          correctId: 'a',
+          hint: '只数涂色的小格，再想一想每小格表示多少钱。',
+          explanation: '整条代表1元，平均分成10格，每格是0.1元。涂色3格表示3个0.1元，即0.3元。'
+        },
+        {
+          id: 'B1', group: 'B', prompt: '同样一袋苹果，2.3 元和 2.8 元哪个便宜？',
+          options: [
+            { id: 'a', text: '2.8 元' },
+            { id: 'b', text: '一样便宜' },
+            { id: 'c', text: '2.3 元' }
+          ],
+          correctId: 'c',
+          hint: '两个价钱的整元部分相同，再看角的部分。',
+          explanation: '两个价钱都是2元多，3角比8角少，所以2.3元这家便宜。'
+        },
+        {
+          id: 'B2', group: 'B', prompt: '买同样一袋苹果，选 2.3 元这家，比 2.8 元这家能省多少？',
+          options: [
+            { id: 'a', text: '3 角' },
+            { id: 'b', text: '5 角' },
+            { id: 'c', text: '8 角' }
+          ],
+          correctId: 'b',
+          hint: '整元部分一样，想一想角的部分相差多少。',
+          explanation: '整元部分都是2元，8角比3角多5角，所以选择2.3元这家能省5角。'
+        },
+        {
+          id: 'B3', group: 'B', prompt: '比较两家水果价钱前，必须先确认什么？',
+          options: [
+            { id: 'a', text: '水果同品种、同品质、同样一袋' },
+            { id: 'b', text: '装水果的袋子颜色一样' },
+            { id: 'c', text: '两家店的招牌一样大' }
+          ],
+          correctId: 'a',
+          hint: '看看两家卖的水果是否可以放在一起公平地比较。',
+          explanation: '先确认同品种、同品质、同样一袋，才能在这个任务中只根据价钱选择。'
+        },
+        {
+          id: 'C1', group: 'C', prompt: '0.7 米是几个 0.1 米？',
+          options: [
+            { id: 'a', text: '1 个' },
+            { id: 'b', text: '10 个' },
+            { id: 'c', text: '7 个' }
+          ],
+          correctId: 'c',
+          hint: '回想1米十等分的丝带图：每小格表示0.1米。',
+          explanation: '0.7米是7个0.1米，对应1米十等分图中的7小格。'
+        },
+        {
+          id: 'C2', group: 'C', prompt: '下面哪句话是对的？',
+          options: [
+            { id: 'a', text: '元表示金额，米表示长度，不能直接比大小。' },
+            { id: 'b', text: '2.3元比0.7米大。' },
+            { id: 'c', text: '只要都写成小数，不同单位也能直接比大小。' }
+          ],
+          correctId: 'a',
+          hint: '先看单位：这两个数表示的是同一种量吗？',
+          explanation: '元表示金额，米表示长度；表示不同种类的量时，不能把数值直接比较大小。'
+        },
+        {
+          id: 'C3', group: 'C', prompt: '哪个生活例子把“数量、单位和用途”说清楚了？',
+          options: [
+            { id: 'a', text: '我看见丝带上写着0.7。' },
+            { id: 'b', text: '我买了一袋苹果。' },
+            { id: 'c', text: '0.7米是一个小数。' },
+            { id: 'd', text: '做蝴蝶结要0.7米丝带，知道长度能帮助我剪取合适的一段。' }
+          ],
+          correctId: 'd',
+          hint: '先找数量和单位，再看有没有说明这个数能帮忙做什么。',
+          explanation: '“0.7米”说明丝带的长度，“帮助剪取合适的一段”说明用途，数量、单位和用途都说清楚了。'
+        }
+      ]
+    },
     fallback: '这个问题我们先问问老师，或者看看图示。'
   };
 
@@ -187,6 +308,17 @@
     },
     comparison: function () {
       return { left: 23, right: 28, difference: 5 };
+    },
+    validTransfer: function (value) {
+      return Number.isSafeInteger(value) && value > 0 && value % 10 !== 0;
+    },
+    composition: function (value) {
+      requireTenths(value);
+      var whole = Math.floor(value / 10), tenths = value % 10;
+      if (tenths === 0) return '正好 ' + whole + ' 元，没有不足 1 元的部分';
+      var price = whole + '.' + tenths;
+      if (whole === 0) return price + ' 元是 ' + tenths + ' 角，也就是 ' + tenths + ' 个 0.1 元。';
+      return price + ' 元是 ' + whole + ' 元 ' + tenths + ' 角，也就是 ' + whole + ' 个 1 元加 ' + tenths + ' 个 0.1 元。';
     },
     escapeHTML: function (value) {
       return String(value).replace(/[&<>"']/g, function (character) {
