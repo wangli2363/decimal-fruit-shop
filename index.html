@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#24564a">
+  <meta name="description" content="把小数说清楚，把数学带回生活。教师操作的小数水果铺，包含价格、比价、长度和生活联系三个任务。">
+  <title>小数水果铺 · 认识小数</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#" aria-label="小数水果铺首页" data-action="home">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 20h32l-3 22H11z" fill="currentColor"/><path d="M17 20l7-14 7 14M8 28h32" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M17 29v7m7-7v7m7-7v7" stroke="#faf7ef" stroke-width="2" stroke-linecap="round"/></svg></span>
+        <span class="brand-copy"><h1>小数水果铺</h1><small>认识小数 · 把数学带回生活</small></span>
+      </a>
+      <div class="top-actions">
+        <button class="quiet-button" type="button" data-action="voice" id="voice-toggle" aria-pressed="false">朗读关闭</button>
+        <button class="quiet-button" type="button" data-action="fullscreen">全屏投影</button>
+        <button class="secondary-button" type="button" data-action="teacher">教师工具</button>
+      </div>
+    </header>
+    <nav class="lesson-nav" aria-label="学习任务" id="lesson-nav"></nav>
+    <main id="app"></main>
+    <footer class="lesson-footer" id="lesson-footer"></footer>
+  </div>
+  <dialog class="teacher-dialog" id="teacher-dialog" aria-labelledby="teacher-title">
+    <div class="dialog-inner">
+      <div class="dialog-heading"><div><p class="eyebrow">课前准备与课堂操作</p><h2 id="teacher-title">教师工具</h2></div><button type="button" class="icon-button" data-action="close-teacher" aria-label="关闭教师工具">×</button></div>
+      <div class="teacher-content">
+        <p>约20分钟的投影教学。先让学生口头解释或在学习单上作答，再点击提示、图示或核对结果。</p>
+        <div class="teacher-grid">
+          <section><h3>建议课堂节奏</h3><ol class="check-list"><li>约6分钟：用单位条解释2.3元。</li><li>约5分钟：选择店铺，说清比较理由。</li><li>约7分钟：解释0.7米，联系个人生活。</li><li>约2分钟：回顾与补充学生解释。</li></ol></section>
+          <section><h3>操作约定</h3><ul class="check-list"><li>“思考提示”只给线索；“核对”才显示结论。</li><li>分层题卡先显示问题，再按需显示提示或回应。</li><li>生活例子由每位学生先写在学习单上，再录入匿名代表例子。</li><li>网页不判断学生解释是否正确，由教师点评。</li></ul></section>
+        </div>
+        <section><h3>任务一：逐步撤去图示</h3><p>先让学生联系价签和单位条解释数量，再依次切换“完整画面”“单位条与小数”“只看小数”。每次隐藏后都请学生重新解释；需要帮助时可随时恢复。展示切换本身不揭示答案。</p></section>
+        <section><h3>听学生怎样解释</h3><p>以下是整节课的人工观察口径，由教师结合口答和学习单判断，不是网页自动评分。</p><ul class="check-list"><li><strong>说清数量与单位：</strong>能解释2.3元表示多少钱，以及单位条每一部分表示什么。</li><li><strong>说明比较的用途：</strong>不仅说2.3小于2.8，还能说明购买同样一袋苹果时，选择A店可以少花5角。</li><li><strong>联系自己的生活：</strong>说出亲身见过的小数、它表示的数量，以及知道这个数能帮自己做什么。</li></ul></section>
+        <section><h3>遇到这些解释时，再追问一步</h3><table><thead><tr><th scope="col">学生可能的说法</th><th scope="col">教师追问与核对口径</th></tr></thead><tbody><tr><td>只读“二点三”，没有解释数量</td><td>“它表示多少钱？请指出完整的元和不足1元的部分。”</td></tr><tr><td>把0.3元说成3分</td><td>“1元平均分成10份，每份是多少？”每份是0.1元，也就是1角；三份是3角。</td></tr><tr><td>两个价格都有2元，所以相等</td><td>“整元部分相同，再看哪一部分？”比较3角与8角，角的部分并不相同。</td></tr><tr><td>直接比较元与米的大小</td><td>“它们分别表示什么？”元表示金额，米表示长度，不能把两种量直接比较大小。</td></tr></tbody></table><p><strong>等价表达：</strong>2.3元＝2元3角＝23角，均可接受；请学生说明单位和换算理由，例如2元是20角，再加3角。</p></section>
+        <section class="teacher-note"><h3>课前核对补充价签</h3><p>苹果原价2.3元来自 C 的主任务。橙子、梨及“今日特价／会员价”的价签为本轮补充示例，具体数值尚需 C 复核；它们不改变任务2固定的2.3元与2.8元。</p><label class="check-label"><input type="checkbox" id="extra-prices"> 在价签探索中显示补充水果、特价与会员价</label><p class="muted">默认仅启用原价苹果。关闭扩展价签或重开课堂会恢复原价苹果。</p></section>
+        <section><h3>本轮内容边界</h3><p>使用固定题库与店主台词，课堂不连接实时 AI。输入只在当前页面临时展示，不上传、不保存到浏览器；重置或关闭页面后清除。备用整套任务待 C 定稿，本轮未用三档价格代替备用题组。</p><p id="voice-status" class="muted">朗读可选；无可用的本地中文语音时，字幕仍可完整使用。</p></section>
+        <div class="task-actions"><button type="button" class="secondary-button" data-action="stop">停止朗读</button><button type="button" class="quiet-button" data-action="reset">重开本次课堂</button></div>
+      </div>
+    </div>
+  </dialog>
+  <dialog class="reset-dialog" id="reset-dialog" aria-labelledby="reset-title"><div class="dialog-inner"><h2 id="reset-title">重新开始这次课堂？</h2><p>会回到水果铺首页，并清除本次输入的生活例子和页面进度。</p><div class="task-actions"><button type="button" class="secondary-button" data-action="cancel-reset">继续当前课堂</button><button type="button" class="primary-button" data-action="confirm-reset">重新开始</button></div></div></dialog>
+  <dialog class="teacher-dialog" id="summary-dialog" aria-labelledby="summary-title"><div class="dialog-inner completion-card"><div class="dialog-heading"><p class="eyebrow">把今天的发现说出来</p><button type="button" class="icon-button" data-action="close-summary" aria-label="关闭回顾">×</button></div><h2 id="summary-title">小数，帮我们看清生活里的数量。</h2><div class="goal-list"><div class="goal-item"><span class="goal-number">1</span><p>2.3元，怎样用完整的1元和不足1元的部分表示？</p></div><div class="goal-item"><span class="goal-number">2</span><p>两家店的价钱，怎样帮助我们作出选择？</p></div><div class="goal-item"><span class="goal-number">3</span><p>离开水果铺，0.7米和你自己的小数例子有什么用？</p></div></div><p class="muted">请听学生解释，确认每位学生都在学习单上完成了自己的生活例子。</p><button type="button" class="primary-button" data-action="close-summary">回到课堂继续交流</button></div></dialog>
+  <div class="sr-only" aria-live="polite" id="announcement"></div>
+  <script src="content.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
