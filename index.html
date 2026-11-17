@@ -1,11 +1,11 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#24564a">
-  <meta name="description" content="把小数说清楚，把数学带回生活。教师操作的小数水果铺，包含三个课堂任务与十道课后练习。">
-  <title>小数水果铺 · 认识小数</title>
+  <meta name="description" content="Explore decimals in everyday life. A teacher-led fruit shop with three classroom tasks and ten practice questions.">
+  <title>Decimal Fruit Shop · Exploring decimals</title>
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 48 48%27%3E%3Crect width=%2748%27 height=%2748%27 rx=%2712%27 fill=%27%2324564a%27/%3E%3Cpath d=%27M10 21h28l-3 19H13zM17 21l7-13 7 13%27 fill=%27%23faf7ef%27/%3E%3C/svg%3E">
   <style>
 :root {
@@ -615,46 +615,67 @@ button { min-width: 44px; min-height: 44px !important; }
   .teacher-content th:first-child { width: 36%; }
 }
 
+/* English copy uses more horizontal space while keeping the classroom visual style. */
+html[lang="en"] .brand-mark { flex-shrink: 0; }
+html[lang="en"] .brand-copy { min-width: 0; }
+html[lang="en"] .brand-copy small { letter-spacing: .025em; }
+html[lang="en"] .step-label { white-space: normal; line-height: 1.4; }
+html[lang="en"] .step-tab:first-child .step-number { width: auto; padding: 0 6px; border-radius: 8px; }
+html[lang="en"] .intro-title { letter-spacing: -.015em; }
+html[lang="en"] .bar-row { width: min(100%, 280px); }
+html[lang="en"] .bar-row .bar-label { flex-basis: 48px; white-space: nowrap; }
+html[lang="en"] .unit-label { display: block; }
+html[lang="en"] .difference-row { grid-template-columns: 120px minmax(0, 1fr); }
+html[lang="en"] .question-heading { flex-wrap: wrap; }
+html[lang="en"] .practice-meter-label { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 10px; margin-bottom: 8px; }
+@media (max-width: 720px) {
+  html[lang="en"] .step-tab { padding: 9px 4px; gap: 5px; }
+  html[lang="en"] .step-label { overflow-wrap: normal; font-size: 11px; }
+  html[lang="en"] .difference-row { grid-template-columns: 86px minmax(0, 1fr); gap: 7px; }
+  html[lang="en"] .brand-copy small { font-size: 10px; letter-spacing: 0; }
+  html[lang="en"] .shop-label { font-size: 16px; }
+}
+
 </style>
 </head>
 <body>
   <div class="app-shell">
     <header class="topbar">
-      <a class="brand" href="#" aria-label="小数水果铺首页" data-action="home">
+      <a class="brand" href="#" aria-label="Decimal Fruit Shop home" data-action="home">
         <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M8 20h32l-3 22H11z" fill="currentColor"/><path d="M17 20l7-14 7 14M8 28h32" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"/><path d="M17 29v7m7-7v7m7-7v7" stroke="#faf7ef" stroke-width="2" stroke-linecap="round"/></svg></span>
-        <span class="brand-copy"><h1>小数水果铺</h1><small>认识小数 · 把数学带回生活</small></span>
+        <span class="brand-copy"><h1>Decimal Fruit Shop</h1><small>Explore decimals · Connect maths with life</small></span>
       </a>
       <div class="top-actions">
-        <button class="quiet-button" type="button" data-action="voice" id="voice-toggle" aria-pressed="false">朗读关闭</button>
-        <button class="quiet-button" type="button" data-action="fullscreen">全屏投影</button>
-        <button class="secondary-button" type="button" data-action="teacher">教师工具</button>
+        <button class="quiet-button" type="button" data-action="voice" id="voice-toggle" aria-pressed="false">Read aloud: off</button>
+        <button class="quiet-button" type="button" data-action="fullscreen">Full screen</button>
+        <button class="secondary-button" type="button" data-action="teacher">Teacher tools</button>
       </div>
     </header>
-    <nav class="lesson-nav" aria-label="学习任务" id="lesson-nav"></nav>
+    <nav class="lesson-nav" aria-label="Learning tasks" id="lesson-nav"></nav>
     <main id="app"></main>
     <footer class="lesson-footer" id="lesson-footer"></footer>
   </div>
   <dialog class="teacher-dialog" id="teacher-dialog" aria-labelledby="teacher-title">
     <div class="dialog-inner">
-      <div class="dialog-heading"><div><p class="eyebrow">课前准备与课堂操作</p><h2 id="teacher-title">教师工具</h2></div><button type="button" class="icon-button" data-action="close-teacher" aria-label="关闭教师工具">×</button></div>
+      <div class="dialog-heading"><div><p class="eyebrow">Preparation and classroom guidance</p><h2 id="teacher-title">Teacher tools</h2></div><button type="button" class="icon-button" data-action="close-teacher" aria-label="Close teacher tools">×</button></div>
       <div class="teacher-content">
-        <p>约20分钟的投影教学。先让学生口头解释或在学习单上作答，再点击提示、图示或核对结果。</p>
+        <p>Allow about 20 minutes for this projected lesson. Let pupils explain aloud or respond on their worksheets before showing hints, diagrams or answers.</p>
         <div class="teacher-grid">
-          <section><h3>建议课堂节奏</h3><ol class="check-list"><li>约6分钟：用单位条解释2.3元。</li><li>约5分钟：选择店铺，说清比较理由。</li><li>约7分钟：解释0.7米，联系个人生活。</li><li>约2分钟：回顾与补充学生解释。</li></ol></section>
-          <section><h3>操作约定</h3><ul class="check-list"><li>“思考提示”只给线索；“核对”才显示结论。</li><li>分层题卡先显示问题，再按需显示提示或回应。</li><li>生活例子由每位学生先写在学习单上，再录入匿名代表例子。</li><li>网页不判断学生解释是否正确，由教师点评。</li></ul></section>
+          <section><h3>Suggested lesson timing</h3><ol class="check-list"><li>About 6 minutes: explain 2.3 yuan with unit bars.</li><li>About 5 minutes: choose a shop and explain the comparison.</li><li>About 7 minutes: explain 0.7 m and connect decimals with everyday life.</li><li>About 2 minutes: review and discuss pupils’ explanations.</li></ol></section>
+          <section><h3>Using the controls</h3><ul class="check-list"><li>“Hint” gives a clue. “Check” reveals the answer.</li><li>Question cards show the question first. Open a hint or answer when needed.</li><li>Each pupil writes a life example on a worksheet first. Then enter one anonymous example for discussion.</li><li>The teacher reviews pupils’ explanations. The page does not mark them.</li></ul></section>
         </div>
-        <section><h3>任务一：逐步撤去图示</h3><p>先让学生联系价签和单位条解释数量，再依次切换“完整画面”“单位条与小数”“只看小数”。每次隐藏后都请学生重新解释；需要帮助时可随时恢复。展示切换本身不揭示答案。</p></section>
-        <section><h3>听学生怎样解释</h3><p>以下是整节课的人工观察口径，由教师结合口答和学习单判断，不是网页自动评分。</p><ul class="check-list"><li><strong>说清数量与单位：</strong>能解释2.3元表示多少钱，以及单位条每一部分表示什么。</li><li><strong>说明比较的用途：</strong>不仅说2.3小于2.8，还能说明购买同样一袋苹果时，选择A店可以少花5角。</li><li><strong>联系自己的生活：</strong>说出亲身见过的小数、它表示的数量，以及知道这个数能帮自己做什么。</li></ul></section>
-        <section><h3>遇到这些解释时，再追问一步</h3><table><thead><tr><th scope="col">学生可能的说法</th><th scope="col">教师追问与核对口径</th></tr></thead><tbody><tr><td>只读“二点三”，没有解释数量</td><td>“它表示多少钱？请指出完整的元和不足1元的部分。”</td></tr><tr><td>把0.3元说成3分</td><td>“1元平均分成10份，每份是多少？”每份是0.1元，也就是1角；三份是3角。</td></tr><tr><td>两个价格都有2元，所以相等</td><td>“整元部分相同，再看哪一部分？”比较3角与8角，角的部分并不相同。</td></tr><tr><td>直接比较元与米的大小</td><td>“它们分别表示什么？”元表示金额，米表示长度，不能把两种量直接比较大小。</td></tr></tbody></table><p><strong>等价表达：</strong>2.3元＝2元3角＝23角，均可接受；请学生说明单位和换算理由，例如2元是20角，再加3角。</p></section>
-        <section class="teacher-note"><h3>迁移水果：把规则用到新价钱</h3><p>默认仅使用2.3元苹果。开启后，任务一“只看小数”阶段可选择“换一种水果，规则还成立吗”，用<span id="transfer-teacher-price">1.8元橙子</span>说一次组成，再核对。任务二仍比较同样一袋苹果的2.3元与2.8元。</p><label class="check-label"><input type="checkbox" id="extra-prices"> 开启迁移水果（建议按班情使用）</label><p class="muted">迁移水果默认关闭；开启后只增加一次组成解释与核对，不重复三档隐藏。</p></section>
-        <section><h3>课后练习</h3><p>课后练习8–10分钟，不记录成绩。十道固定题对应三个课堂任务；答对一题点亮一格，十格合成1元。每题最多尝试两次，第一次先给提示，第二次仍需帮助时展示答案与解释。刷新会重新开始。</p></section>
-        <section><h3>使用说明</h3><p>使用固定题库与店主台词，课堂不连接实时 AI。输入只在当前页面临时展示，不上传、不保存到浏览器；重置或关闭页面后清除。</p><p id="voice-status" class="muted">朗读可选；无可用的本地中文语音时，字幕仍可完整使用。</p></section>
-        <div class="task-actions"><button type="button" class="secondary-button" data-action="stop">停止朗读</button><button type="button" class="quiet-button" data-action="reset">重开本次课堂</button></div>
+        <section><h3>Task 1: gradually hide the pictures</h3><p>First, ask pupils to connect the price tag and unit bars. Then switch from “Full scene” to “Bars and decimal” and “Decimal only”. Ask pupils to explain again after each change. Restore the pictures whenever needed. Changing the display does not reveal the answer.</p></section>
+        <section><h3>Listening to pupils’ explanations</h3><p>Use pupils’ spoken answers and worksheets to consider the points below. These are teacher observations, not automatic scores.</p><ul class="check-list"><li><strong>Quantity and unit: </strong>Explain how much 2.3 yuan is and what each part of a unit bar represents.</li><li><strong>Use of the comparison: </strong>Explain that 2.3 is less than 2.8 and that choosing Shop A saves 5 jiao for the same bag of apples.</li><li><strong>Personal connection: </strong>Describe a decimal they have seen, the quantity it represents and how knowing it helps them.</li></ul></section>
+        <section><h3>Questions to explore common misunderstandings</h3><table><thead><tr><th scope="col">What a pupil might say</th><th scope="col">Teacher prompt and explanation</th></tr></thead><tbody><tr><td>Says “two point three” without explaining the quantity</td><td>“How much money is it? Point to the whole yuan and the part smaller than 1 yuan.”</td></tr><tr><td>Calls 0.3 yuan “3 fen”</td><td>“If 1 yuan is divided into 10 equal parts, how much is each part?” Each part is 0.1 yuan, or 1 jiao. Three parts are 3 jiao.</td></tr><tr><td>Says the prices are equal because both have 2 whole yuan</td><td>“The whole-yuan parts are the same. Which part should we compare next?” Compare 3 jiao and 8 jiao. These parts differ.</td></tr><tr><td>Directly compares yuan with metres</td><td>“What does each unit measure?” Yuan measures money and metres measure length. We cannot directly compare these different quantities.</td></tr></tbody></table><p><strong>Equivalent expressions: </strong>2.3 yuan = 2 yuan and 3 jiao = 23 jiao. All are acceptable. Ask pupils to explain the units and conversion: 2 yuan is 20 jiao, plus 3 jiao.</p></section>
+        <section class="teacher-note"><h3>Try another fruit: apply the rule to a new price</h3><p>The main task uses only the 2.3-yuan apples. When enabled, “Does the rule work for another fruit?” appears in Task 1 at the “Decimal only” stage. Use <span id="transfer-teacher-price">oranges at 1.8 yuan</span> to explain the parts once, then check. Task 2 still compares the same bag of apples at 2.3 yuan and 2.8 yuan.</p><label class="check-label"><input type="checkbox" id="extra-prices"> Enable another-fruit challenge (use when suitable for your class)</label><p class="muted">This challenge is off by default. It adds one explanation and check, without repeating the three display stages.</p></section>
+        <section><h3>After-class practice</h3><p>Allow 8–10 minutes for after-class practice. No results are saved. Ten fixed questions revisit the three tasks. Each correct answer lights one cell. Ten cells make 1 yuan. There are up to two attempts per question. After the first unsuccessful choice, pupils receive a hint. After the second, they see the answer and explanation. Refreshing starts again.</p></section>
+        <section><h3>About this resource</h3><p>Questions and the shopkeeper’s lines are preset. No live AI runs during the lesson. Entries appear only in the current page. They are not uploaded or saved in the browser, and are cleared when you reset or close the page.</p><p id="voice-status" class="muted">Read-aloud is optional. If no local English voice is available, all text remains on screen.</p></section>
+        <div class="task-actions"><button type="button" class="secondary-button" data-action="stop">Stop reading</button><button type="button" class="quiet-button" data-action="reset">Restart lesson</button></div>
       </div>
     </div>
   </dialog>
-  <dialog class="reset-dialog" id="reset-dialog" aria-labelledby="reset-title"><div class="dialog-inner"><h2 id="reset-title">重新开始这次课堂？</h2><p>会回到水果铺首页，并清除本次输入的生活例子和页面进度。</p><div class="task-actions"><button type="button" class="secondary-button" data-action="cancel-reset">继续当前课堂</button><button type="button" class="primary-button" data-action="confirm-reset">重新开始</button></div></div></dialog>
-  <dialog class="teacher-dialog" id="summary-dialog" aria-labelledby="summary-title"><div class="dialog-inner completion-card"><div class="dialog-heading"><p class="eyebrow">把今天的发现说出来</p><button type="button" class="icon-button" data-action="close-summary" aria-label="关闭回顾">×</button></div><h2 id="summary-title">小数，帮我们看清生活里的数量。</h2><div class="goal-list"><div class="goal-item"><span class="goal-number">1</span><p>2.3元，怎样用完整的1元和不足1元的部分表示？</p></div><div class="goal-item"><span class="goal-number">2</span><p>两家店的价钱，怎样帮助我们作出选择？</p></div><div class="goal-item"><span class="goal-number">3</span><p>离开水果铺，0.7米和你自己的小数例子有什么用？</p></div></div><p class="muted">请听学生解释，确认每位学生都在学习单上完成了自己的生活例子。</p><div class="task-actions summary-actions"><button type="button" class="secondary-button" data-action="close-summary">回到课堂继续交流</button><button type="button" class="primary-button" data-action="practice-start">课后练一练</button></div></div></dialog>
+  <dialog class="reset-dialog" id="reset-dialog" aria-labelledby="reset-title"><div class="dialog-inner"><h2 id="reset-title">Restart this lesson?</h2><p>This returns to the shop home page and clears the life example and progress from this lesson.</p><div class="task-actions"><button type="button" class="secondary-button" data-action="cancel-reset">Keep going</button><button type="button" class="primary-button" data-action="confirm-reset">Restart</button></div></div></dialog>
+  <dialog class="teacher-dialog" id="summary-dialog" aria-labelledby="summary-title"><div class="dialog-inner completion-card"><div class="dialog-heading"><p class="eyebrow">Share what you discovered</p><button type="button" class="icon-button" data-action="close-summary" aria-label="Close review">×</button></div><h2 id="summary-title">Decimals help us describe quantities in everyday life.</h2><div class="goal-list"><div class="goal-item"><span class="goal-number">1</span><p>How can whole yuan and parts smaller than 1 yuan show 2.3 yuan?</p></div><div class="goal-item"><span class="goal-number">2</span><p>How do the two prices help us choose a shop?</p></div><div class="goal-item"><span class="goal-number">3</span><p>How are 0.7 m and your own decimal example useful beyond the fruit shop?</p></div></div><p class="muted">Listen to pupils’ explanations and check that everyone has written a personal life example on the worksheet.</p><div class="task-actions summary-actions"><button type="button" class="secondary-button" data-action="close-summary">Back to the lesson</button><button type="button" class="primary-button" data-action="practice-start">Try the practice</button></div></div></dialog>
   <div class="sr-only" aria-live="polite" id="announcement"></div>
   <script>
 /* Fixed classroom content. Source and review status: docs/教学内容核对.md.
@@ -673,286 +694,427 @@ button { min-width: 44px; min-height: 44px !important; }
 
   function requireTenths(value) {
     if (!Number.isSafeInteger(value) || value < 0) {
-      throw new TypeError('金额必须为非负整数角。');
+      throw new TypeError('Amounts must be non-negative whole numbers of jiao.');
     }
     return value;
   }
 
   var content = {
-    fruits: [
-      { id: 'apple', name: '苹果', unit: '袋', prices: { original: 23 } }
+    "fruits": [
+      {
+        "id": "apple",
+        "name": "Apples",
+        "unit": "bag",
+        "prices": {
+          "original": 23
+        }
+      }
     ],
-    presets: [
-      { id: 'original', label: '原价' }
+    "presets": [
+      {
+        "id": "original",
+        "label": "Original price"
+      }
     ],
-    // Amount is in integer jiao. Change only 18 to 29 for the alternative task.
-    // Whole-yuan amounts are intentionally excluded from this transfer activity.
-    transfer: { fruitId: 'orange', name: '橙子', unit: '袋', amount: 18 },
-    tasks: {
-      1: {
-        title: '说清价钱',
-        subtitle: '把价格、单位条和元角联系起来',
-        opening: '欢迎来水果铺！先看看这张价格牌，你能说说 {price} 元表示多少钱吗？',
-        hint: '先看有几个完整的 1 元，再看不足 1 元的部分。',
-        answer: '{price} 元是 {whole} 元 {tenths} 角，也就是 {whole} 个 1 元加 {tenths} 个 0.1 元。每条单位条代表 1 元，十等分后每小格是 0.1 元，也就是 1 角。',
-        questions: {
-          basic: [
+    "transfer": {
+      "fruitId": "orange",
+      "name": "Oranges",
+      "unit": "bag",
+      "amount": 18
+    },
+    "tasks": {
+      "1": {
+        "title": "Explain the price",
+        "subtitle": "Connect the price, unit bars, yuan and jiao",
+        "opening": "Welcome to the fruit shop! Look at this price tag. Can you explain how much {price} yuan is?",
+        "hint": "First count the whole yuan. Then look at the part smaller than 1 yuan.",
+        "answer": "{price} yuan is {whole} yuan and {tenths} jiao: {whole} lots of 1 yuan plus {tenths} lots of 0.1 yuan. Each unit bar represents 1 yuan. It has ten equal cells, so each cell is 0.1 yuan, or 1 jiao.",
+        "questions": {
+          "basic": [
             {
-              q: '0.1 元是多少角？',
-              hint: '看看 1 元的单位条被平均分成了多少份，再想想元和角的关系。',
-              answer: '1 元等于 10 角，平均分成 10 份后，每份是 0.1 元，也就是 1 角。'
+              "q": "How many jiao is 0.1 yuan?",
+              "hint": "Look at how many equal parts make up the 1-yuan bar. Think about yuan and jiao.",
+              "answer": "1 yuan equals 10 jiao. Dividing it into 10 equal parts gives 0.1 yuan, or 1 jiao, in each part."
             },
             {
-              q: '{price} 元里有几个 1 元、几个 0.1 元？',
-              hint: '先数完整的单位条，再数不足 1 元的涂色小格。',
-              answer: '有 {whole} 个 1 元和 {tenths} 个 0.1 元，合起来是 {price} 元。'
+              "q": "How many lots of 1 yuan and 0.1 yuan make {price} yuan?",
+              "hint": "Count the whole bars first. Then count the shaded cells in the part smaller than 1 yuan.",
+              "answer": "There are {whole} lots of 1 yuan and {tenths} lots of 0.1 yuan. Together, they make {price} yuan."
             },
             {
-              q: '这个价钱中，不足 1 元的部分对应几小格？表示多少元？',
-              hint: '先找到每一小格代表的金额，再说涂色部分的金额。',
-              answer: '每小格是 0.1 元，不足 1 元的部分对应 {tenths} 小格，是 0.{tenths} 元，也就是 {tenths} 角。'
+              "q": "How many cells show the part smaller than 1 yuan? How much money is that?",
+              "hint": "Find the value of one cell. Then explain the value of the shaded part.",
+              "answer": "Each cell is 0.1 yuan. The part smaller than 1 yuan has {tenths} cells. It is 0.{tenths} yuan, or {tenths} jiao."
             }
           ],
-          apply: [
+          "apply": [
             {
-              q: '你能把 {price} 元说给一位顾客听吗？',
-              hint: '可以一边指单位条，一边从整元部分说起。',
-              answer: '这袋水果的价格是 {whole} 元 {tenths} 角，写成小数就是 {price} 元。请指着对应的单位条说明。'
+              "q": "Can you explain {price} yuan to a customer?",
+              "hint": "Point to the bars as you explain. Start with the whole yuan.",
+              "answer": "This bag of fruit costs {whole} yuan and {tenths} jiao. Written as a decimal, that is {price} yuan. Point to the matching bars as you explain."
             },
             {
-              q: '怎样用单位条说明 0.{tenths} 元的含义？',
-              hint: '先说整条代表什么，再说每小格代表什么。',
-              answer: '整条代表 1 元，平均分成 10 份，每份是 0.1 元。不足 1 元的部分是 {tenths} 份，即 0.{tenths} 元，也就是 {tenths} 角。读金额时要把角与分的单位说清楚。'
+              "q": "How do the unit bars show 0.{tenths} yuan?",
+              "hint": "Explain what the whole bar represents, then what one cell represents.",
+              "answer": "The whole bar is 1 yuan. It has 10 equal parts, each worth 0.1 yuan. The part smaller than 1 yuan has {tenths} parts: 0.{tenths} yuan, or {tenths} jiao. Say the money unit clearly so that jiao and fen are not confused."
             }
           ],
-          extend: [
+          "extend": [
             {
-              q: '价格牌上的小数在生活里有什么用？',
-              hint: '想想顾客看完价格牌后，能够知道或决定什么。',
-              answer: '价格牌让顾客知道商品的价钱，可以帮助准备付款或比较价格。请结合自己的经历说明。'
+              "q": "How are decimals on price tags useful in daily life?",
+              "hint": "What can a customer find out or decide after reading a price tag?",
+              "answer": "A price tag tells customers how much an item costs. It helps them prepare payment or compare prices. Explain using your own experience."
             },
             {
-              q: '你在哪里见过这样的价格？知道价钱能帮你做什么？',
-              hint: '回想一次买东西的经历，把看到的数和用途一起说出来。',
-              answer: '可以说出商店、超市或其他真实情境中的小数价格，并说明它怎样帮助了解价钱、准备付款或作出选择。不同经历由老师听取和点评。'
+              "q": "Where have you seen a price like this? How does knowing the price help you?",
+              "hint": "Think of a time you went shopping. Say the number you saw and how it helped.",
+              "answer": "Give a decimal price you have seen in a shop, supermarket or another real place. Explain how it helped you understand the cost, prepare payment or make a choice. Your teacher will discuss your example with you."
             }
           ]
         }
       },
-      2: {
-        title: '帮我选一家',
-        subtitle: '比较同样水果的价格，并说出理由',
-        opening: '两家店卖的是同品种、同品质、同样一袋苹果。你想选哪一家？先说说理由。',
-        hint: '先比整元部分，再比角的部分。请把选择的理由说完整。',
-        answer: '两家店的整元部分都是 2 元。3 角比 8 角少，所以 2.3 元小于 2.8 元。买同样一袋苹果，选 2.3 元这家可以少花 5 角钱。',
-        questions: {
-          basic: [
+      "2": {
+        "title": "Choose a shop",
+        "subtitle": "Compare prices for the same fruit and explain your choice",
+        "opening": "Both shops sell the same variety and quality of apples, with the same amount in each bag. Which shop would you choose? Explain your reason first.",
+        "hint": "Compare the whole yuan first, then the jiao. Explain why you chose that shop.",
+        "answer": "Both prices have 2 whole yuan. 3 jiao is less than 8 jiao, so 2.3 yuan is less than 2.8 yuan. For the same bag of apples, choosing the shop charging 2.3 yuan saves 5 jiao.",
+        "questions": {
+          "basic": [
             {
-              q: '2.3 元中的“2”和“3”分别表示什么？',
-              hint: '把元和角分别说清楚，可以回想刚才的单位条。',
-              answer: '“2”表示 2 个 1 元，“3”表示 3 个 0.1 元，也就是 3 角。'
+              "q": "What do the “2” and “3” in 2.3 yuan each represent?",
+              "hint": "Explain the yuan and jiao separately. Think back to the unit bars.",
+              "answer": "The “2” means 2 lots of 1 yuan. The “3” means 3 lots of 0.1 yuan, or 3 jiao."
             },
             {
-              q: '这两个价钱有什么相同的部分？有什么不同的部分？',
-              hint: '先看整元部分，再看不足 1 元的部分。',
-              answer: '整元部分都是 2 元；角的部分分别是 3 角和 8 角。'
+              "q": "What is the same about these two prices? What is different?",
+              "hint": "Look at the whole yuan first, then the part smaller than 1 yuan.",
+              "answer": "Both prices have 2 whole yuan. The jiao parts are 3 jiao and 8 jiao."
             }
           ],
-          apply: [
+          "apply": [
             {
-              q: '2.3 元和 2.8 元，哪家便宜？你是怎么比出来的？',
-              hint: '同样的苹果，先比较整元，再比较角的部分。',
-              answer: '2.3 元这家便宜。两个价钱都是 2 元多，3 角比 8 角少，因此 2.3 元小于 2.8 元。'
+              "q": "Which is cheaper: 2.3 yuan or 2.8 yuan? How did you compare them?",
+              "hint": "For the same apples, compare the whole yuan first, then the jiao.",
+              "answer": "The shop charging 2.3 yuan is cheaper. Both prices are a little more than 2 yuan. 3 jiao is less than 8 jiao, so 2.3 yuan is less than 2.8 yuan."
             },
             {
-              q: '选便宜的这家，能省多少钱？',
-              hint: '整元部分相同，想一想角的部分相差多少，回答时带上单位。',
-              answer: '8 角比 3 角多 5 角，所以买同样一袋苹果可以省 5 角钱。'
+              "q": "How much can you save by choosing the cheaper shop?",
+              "hint": "The whole yuan parts are the same. Find the difference between the jiao parts, and include the unit.",
+              "answer": "8 jiao is 5 jiao more than 3 jiao. You can save 5 jiao on the same bag of apples."
             }
           ],
-          extend: [
+          "extend": [
             {
-              q: '购物时，小数能帮我们做什么决定？',
-              hint: '把价钱和刚才的选择联系起来说。',
-              answer: '在商品品种、品质和数量相同的条件下，小数价格能帮助比较价钱、选择购买地点。'
+              "q": "What decisions can decimals help us make when shopping?",
+              "hint": "Connect the prices with the choice you just made.",
+              "answer": "When the variety, quality and amount are the same, decimal prices help us compare costs and choose where to buy."
             },
             {
-              q: '为什么比较前要确认两袋苹果是同样的？',
-              hint: '看看两家店出售的东西和份量是否一致。',
-              answer: '比较同种、同量、同质量的商品，才能在这个任务中仅依据价钱判断哪家便宜。'
+              "q": "Why should we check that the two bags of apples are the same before comparing prices?",
+              "hint": "Check what each shop sells and how much is in each bag.",
+              "answer": "When the variety, amount and quality are the same, we can use just the price to decide which shop is cheaper in this task."
             }
           ]
         }
       },
-      3: {
-        title: '把小数带回家',
-        subtitle: '认识 0.7 米，再写一个自己的生活例子',
-        opening: '店主想准备一段 0.7 米的丝带。看这条 1 米长的图示，你会从哪里剪？',
-        hint: '先看整条表示多长、平均分成多少份，再找出需要的部分。',
-        answer: '1 米平均分成 10 份，每份是 0.1 米。0.7 米是 7 个 0.1 米，也就是十分之七米。元表示金额，米表示长度，不能把元与米直接比较大小。',
-        questions: {
-          basic: [
+      "3": {
+        "title": "Decimals in daily life",
+        "subtitle": "Explore 0.7 metres, then write your own everyday example",
+        "opening": "Mr Lin needs 0.7 metres of ribbon. Look at this 1-metre strip. Where would you cut it?",
+        "hint": "Check the length of the whole strip and how many equal parts it has. Then find the part you need.",
+        "answer": "1 metre divided into 10 equal parts gives 0.1 metres in each part. 0.7 metres is 7 lots of 0.1 metres, or seven tenths of a metre. Yuan measures money and metres measure length. We cannot compare them directly.",
+        "questions": {
+          "basic": [
             {
-              q: '1 米平均分成 10 份，每份是多少米？',
-              hint: '想一想十等分图中一小格与整条的关系。',
-              answer: '每份是十分之一米，写成小数是 0.1 米。'
+              "q": "If 1 metre is divided into 10 equal parts, how long is each part?",
+              "hint": "Think about how one cell relates to the whole strip with ten equal parts.",
+              "answer": "Each part is one tenth of a metre, written as 0.1 metres."
             },
             {
-              q: '0.7 米对应图上的几小格？这些小格表示多少米？',
-              hint: '先确认每小格的长度，再把需要的小格指出来。',
-              answer: '对应 7 小格。每小格是 0.1 米，7 小格合起来是 0.7 米。'
+              "q": "How many cells show 0.7 metres? What length do they represent?",
+              "hint": "Check the length of one cell first. Then point to the cells you need.",
+              "answer": "7 cells show this length. Each cell is 0.1 metres, so 7 cells make 0.7 metres."
             }
           ],
-          apply: [
+          "apply": [
             {
-              q: '0.7 米有多长？你能在图上指出来吗？',
-              hint: '从起点开始，沿着十等分的图示寻找剪的位置。',
-              answer: '从起点数到第 7 小格的末端，这一段长 0.7 米。'
+              "q": "How long is 0.7 metres? Can you point to it on the strip?",
+              "hint": "Start at zero and use the ten equal parts to find where to cut.",
+              "answer": "Count from the start to the end of the seventh cell. This length is 0.7 metres."
             },
             {
-              q: '知道丝带是 0.7 米，能帮助准备材料的人做什么？',
-              hint: '想想准备丝带时，需要知道哪一项信息。',
-              answer: '它说明需要的长度，可以帮助量出并剪取相应的一段丝带。'
+              "q": "How does knowing the ribbon length is 0.7 metres help someone prepare it?",
+              "hint": "What do you need to know when preparing a piece of ribbon?",
+              "answer": "It tells you the length you need, so you can measure and cut the right piece of ribbon."
             }
           ],
-          extend: [
+          "extend": [
             {
-              q: '生活中你还在哪里见过小数？这个数有什么用？',
-              hint: '想一想除了买东西，小数还会出现在哪里。把数、单位和用途说清楚。',
-              answer: '可以从身高、长度或价签等真实经历中举例，并说明小数帮助了解、测量或判断什么。例子由老师听取和点评。'
+              "q": "Where else have you seen a decimal in daily life? How was it useful?",
+              "hint": "Think beyond shopping. Explain the number, its unit and how it helped you.",
+              "answer": "Give a real example, such as a height, a length or a price. Explain what the decimal helped you understand, measure or decide. Your teacher will discuss your example with you."
             },
             {
-              q: '除了买东西，小数还可以表示什么？',
-              hint: '看看丝带，再回想生活中需要测量的事物。',
-              answer: '小数也可以表示长度，例如以米为单位表示丝带长度或身高。金额与长度的单位不同，不能把元与米直接比较大小。'
+              "q": "What can decimals show besides prices?",
+              "hint": "Look at the ribbon. Think of things you measure in daily life.",
+              "answer": "Decimals can also show length, such as the length of a ribbon or a height in metres. Money and length use different units, so we cannot compare yuan and metres directly."
             }
           ]
         }
       }
     },
-    practice: {
-      shuffleDefault: false,
-      groups: [
-        { id: 'A', title: '说清组成', review: '一条单位条代表1元，每小格是0.1元；先看整元，再看角的部分。' },
-        { id: 'B', title: '比价', review: '比较同品种、同品质、同样一袋的苹果，先比整元，再比角；2.3元比2.8元少5角。' },
-        { id: 'C', title: '长度与生活', review: '0.7米是7个0.1米；说生活例子时，要把数量、单位和用途一起说清楚。' }
+    "practice": {
+      "shuffleDefault": false,
+      "groups": [
+        {
+          "id": "A",
+          "title": "Parts of a price",
+          "review": "One unit bar is 1 yuan. Each cell is 0.1 yuan. Look at the whole yuan first, then the jiao."
+        },
+        {
+          "id": "B",
+          "title": "Comparing prices",
+          "review": "Compare bags of apples with the same variety, quality and amount. Compare whole yuan first, then jiao. 2.3 yuan is 5 jiao less than 2.8 yuan."
+        },
+        {
+          "id": "C",
+          "title": "Length and daily life",
+          "review": "0.7 metres is 7 lots of 0.1 metres. In your everyday example, explain the quantity, unit and purpose."
+        }
       ],
-      questions: [
+      "questions": [
         {
-          id: 'A1', group: 'A', prompt: '0.1 元等于多少角？',
-          options: [
-            { id: 'a', text: '0.1 角' },
-            { id: 'b', text: '1 角' },
-            { id: 'c', text: '10 角' }
+          "id": "A1",
+          "group": "A",
+          "prompt": "How many jiao is 0.1 yuan?",
+          "options": [
+            {
+              "id": "a",
+              "text": "0.1 jiao"
+            },
+            {
+              "id": "b",
+              "text": "1 jiao"
+            },
+            {
+              "id": "c",
+              "text": "10 jiao"
+            }
           ],
-          correctId: 'b',
-          hint: '想一想：1元平均分成10份，每份与“角”有什么关系？',
-          explanation: '1元等于10角，平均分成10份，每份是0.1元，也就是1角。'
+          "correctId": "b",
+          "hint": "Think about 1 yuan divided into 10 equal parts. How does each part relate to jiao?",
+          "explanation": "1 yuan equals 10 jiao. Dividing it into 10 equal parts gives 0.1 yuan, or 1 jiao, in each part."
         },
         {
-          id: 'A2', group: 'A', prompt: '2.3 元里有几个 1 元、几个 0.1 元？',
-          options: [
-            { id: 'a', text: '2 个 1 元、3 个 0.1 元' },
-            { id: 'b', text: '3 个 1 元、2 个 0.1 元' },
-            { id: 'c', text: '2 个 1 元、8 个 0.1 元' }
+          "id": "A2",
+          "group": "A",
+          "prompt": "How many lots of 1 yuan and 0.1 yuan make 2.3 yuan?",
+          "options": [
+            {
+              "id": "a",
+              "text": "2 lots of 1 yuan and 3 lots of 0.1 yuan"
+            },
+            {
+              "id": "b",
+              "text": "3 lots of 1 yuan and 2 lots of 0.1 yuan"
+            },
+            {
+              "id": "c",
+              "text": "2 lots of 1 yuan and 8 lots of 0.1 yuan"
+            }
           ],
-          correctId: 'a',
-          hint: '先看有几个完整的1元，再看不足1元的部分。',
-          explanation: '2.3元是2元3角，也就是2个1元加3个0.1元。'
+          "correctId": "a",
+          "hint": "First count the whole yuan. Then look at the part smaller than 1 yuan.",
+          "explanation": "2.3 yuan is 2 yuan and 3 jiao: 2 lots of 1 yuan plus 3 lots of 0.1 yuan."
         },
         {
-          id: 'A3', group: 'A', prompt: '2.3 元中“3”表示什么？',
-          options: [
-            { id: 'a', text: '3 分' },
-            { id: 'b', text: '3 元' },
-            { id: 'c', text: '3 个 0.1 元，也就是 3 角' }
+          "id": "A3",
+          "group": "A",
+          "prompt": "What does the “3” in 2.3 yuan represent?",
+          "options": [
+            {
+              "id": "a",
+              "text": "3 fen"
+            },
+            {
+              "id": "b",
+              "text": "3 yuan"
+            },
+            {
+              "id": "c",
+              "text": "3 lots of 0.1 yuan, or 3 jiao"
+            }
           ],
-          correctId: 'c',
-          hint: '“3”在小数点后。请回想不足1元的单位条中，每格表示什么。',
-          explanation: '小数点后的“3”表示3个0.1元，也就是3角。'
+          "correctId": "c",
+          "hint": "The “3” is after the decimal point. What does each cell in the part smaller than 1 yuan represent?",
+          "explanation": "The “3” after the decimal point means 3 lots of 0.1 yuan, or 3 jiao."
         },
         {
-          id: 'A4', group: 'A', prompt: '图上涂了几格，表示多少钱？',
-          diagram: { type: 'money', amount: 3 },
-          options: [
-            { id: 'a', text: '3 格，0.3 元' },
-            { id: 'b', text: '7 格，0.7 元' },
-            { id: 'c', text: '3 格，0.1 元' }
+          "id": "A4",
+          "group": "A",
+          "prompt": "How many cells are shaded? How much money do they represent?",
+          "diagram": {
+            "type": "money",
+            "amount": 3
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": "3 cells, 0.3 yuan"
+            },
+            {
+              "id": "b",
+              "text": "7 cells, 0.7 yuan"
+            },
+            {
+              "id": "c",
+              "text": "3 cells, 0.1 yuan"
+            }
           ],
-          correctId: 'a',
-          hint: '只数涂色的小格，再想一想每小格表示多少钱。',
-          explanation: '整条代表1元，平均分成10格，每格是0.1元。涂色3格表示3个0.1元，即0.3元。'
+          "correctId": "a",
+          "hint": "Count only the shaded cells. Then think about the value of each cell.",
+          "explanation": "The whole bar is 1 yuan, divided into 10 equal cells. Each cell is 0.1 yuan. Three shaded cells show 3 lots of 0.1 yuan, or 0.3 yuan."
         },
         {
-          id: 'B1', group: 'B', prompt: '同样一袋苹果，2.3 元和 2.8 元哪个便宜？',
-          options: [
-            { id: 'a', text: '2.8 元' },
-            { id: 'b', text: '一样便宜' },
-            { id: 'c', text: '2.3 元' }
+          "id": "B1",
+          "group": "B",
+          "prompt": "For the same bag of apples, which is cheaper: 2.3 yuan or 2.8 yuan?",
+          "options": [
+            {
+              "id": "a",
+              "text": "2.8 yuan"
+            },
+            {
+              "id": "b",
+              "text": "They cost the same"
+            },
+            {
+              "id": "c",
+              "text": "2.3 yuan"
+            }
           ],
-          correctId: 'c',
-          hint: '两个价钱的整元部分相同，再看角的部分。',
-          explanation: '两个价钱都是2元多，3角比8角少，所以2.3元这家便宜。'
+          "correctId": "c",
+          "hint": "Both prices have the same number of whole yuan. Look at the jiao next.",
+          "explanation": "Both prices are a little more than 2 yuan. 3 jiao is less than 8 jiao, so the shop charging 2.3 yuan is cheaper."
         },
         {
-          id: 'B2', group: 'B', prompt: '买同样一袋苹果，选 2.3 元这家，比 2.8 元这家能省多少？',
-          options: [
-            { id: 'a', text: '3 角' },
-            { id: 'b', text: '5 角' },
-            { id: 'c', text: '8 角' }
+          "id": "B2",
+          "group": "B",
+          "prompt": "For the same bag of apples, how much do you save by paying 2.3 yuan instead of 2.8 yuan?",
+          "options": [
+            {
+              "id": "a",
+              "text": "3 jiao"
+            },
+            {
+              "id": "b",
+              "text": "5 jiao"
+            },
+            {
+              "id": "c",
+              "text": "8 jiao"
+            }
           ],
-          correctId: 'b',
-          hint: '整元部分一样，想一想角的部分相差多少。',
-          explanation: '整元部分都是2元，8角比3角多5角，所以选择2.3元这家能省5角。'
+          "correctId": "b",
+          "hint": "The whole yuan parts are the same. Find the difference between the jiao parts.",
+          "explanation": "Both prices have 2 whole yuan. 8 jiao is 5 jiao more than 3 jiao, so choosing the shop charging 2.3 yuan saves 5 jiao."
         },
         {
-          id: 'B3', group: 'B', prompt: '比较两家水果价钱前，必须先确认什么？',
-          options: [
-            { id: 'a', text: '水果同品种、同品质、同样一袋' },
-            { id: 'b', text: '装水果的袋子颜色一样' },
-            { id: 'c', text: '两家店的招牌一样大' }
+          "id": "B3",
+          "group": "B",
+          "prompt": "What must we check before comparing the two fruit prices?",
+          "options": [
+            {
+              "id": "a",
+              "text": "The same variety, quality and amount of fruit in each bag"
+            },
+            {
+              "id": "b",
+              "text": "The bags are the same colour"
+            },
+            {
+              "id": "c",
+              "text": "The shop signs are the same size"
+            }
           ],
-          correctId: 'a',
-          hint: '看看两家卖的水果是否可以放在一起公平地比较。',
-          explanation: '先确认同品种、同品质、同样一袋，才能在这个任务中只根据价钱选择。'
+          "correctId": "a",
+          "hint": "Can we compare what the two shops sell fairly?",
+          "explanation": "Check that both bags have the same variety, quality and amount of fruit. Then we can choose using only the price in this task."
         },
         {
-          id: 'C1', group: 'C', prompt: '0.7 米是几个 0.1 米？',
-          options: [
-            { id: 'a', text: '1 个' },
-            { id: 'b', text: '10 个' },
-            { id: 'c', text: '7 个' }
+          "id": "C1",
+          "group": "C",
+          "prompt": "How many lots of 0.1 metres make 0.7 metres?",
+          "options": [
+            {
+              "id": "a",
+              "text": "1"
+            },
+            {
+              "id": "b",
+              "text": "10"
+            },
+            {
+              "id": "c",
+              "text": "7"
+            }
           ],
-          correctId: 'c',
-          hint: '回想1米十等分的丝带图：每小格表示0.1米。',
-          explanation: '0.7米是7个0.1米，对应1米十等分图中的7小格。'
+          "correctId": "c",
+          "hint": "Think of the 1-metre ribbon divided into ten equal parts. Each cell is 0.1 metres.",
+          "explanation": "0.7 metres is 7 lots of 0.1 metres. It covers 7 cells of the 1-metre strip divided into ten equal parts."
         },
         {
-          id: 'C2', group: 'C', prompt: '下面哪句话是对的？',
-          options: [
-            { id: 'a', text: '元表示金额，米表示长度，不能直接比大小。' },
-            { id: 'b', text: '2.3元比0.7米大。' },
-            { id: 'c', text: '只要都写成小数，不同单位也能直接比大小。' }
+          "id": "C2",
+          "group": "C",
+          "prompt": "Which statement is correct?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Yuan measures money and metres measure length. We cannot compare them directly."
+            },
+            {
+              "id": "b",
+              "text": "2.3 yuan is greater than 0.7 metres."
+            },
+            {
+              "id": "c",
+              "text": "We can directly compare different units as long as the numbers are decimals."
+            }
           ],
-          correctId: 'a',
-          hint: '先看单位：这两个数表示的是同一种量吗？',
-          explanation: '元表示金额，米表示长度；表示不同种类的量时，不能把数值直接比较大小。'
+          "correctId": "a",
+          "hint": "Look at the units first. Do the two numbers describe the same kind of quantity?",
+          "explanation": "Yuan measures money and metres measure length. We cannot directly compare the numbers when they describe different kinds of quantity."
         },
         {
-          id: 'C3', group: 'C', prompt: '哪个生活例子把“数量、单位和用途”说清楚了？',
-          options: [
-            { id: 'a', text: '我看见丝带上写着0.7。' },
-            { id: 'b', text: '我买了一袋苹果。' },
-            { id: 'c', text: '0.7米是一个小数。' },
-            { id: 'd', text: '做蝴蝶结要0.7米丝带，知道长度能帮助我剪取合适的一段。' }
+          "id": "C3",
+          "group": "C",
+          "prompt": "Which everyday example explains the quantity, unit and purpose?",
+          "options": [
+            {
+              "id": "a",
+              "text": "I saw 0.7 written on a ribbon."
+            },
+            {
+              "id": "b",
+              "text": "I bought a bag of apples."
+            },
+            {
+              "id": "c",
+              "text": "0.7 metres is a decimal."
+            },
+            {
+              "id": "d",
+              "text": "I need 0.7 metres of ribbon for a bow. Knowing the length helps me cut the right piece."
+            }
           ],
-          correctId: 'd',
-          hint: '先找数量和单位，再看有没有说明这个数能帮忙做什么。',
-          explanation: '“0.7米”说明丝带的长度，“帮助剪取合适的一段”说明用途，数量、单位和用途都说清楚了。'
+          "correctId": "d",
+          "hint": "Find the quantity and unit first. Then check whether the example explains how the number helps.",
+          "explanation": "“0.7 metres” gives the ribbon length. “Cut the right piece” explains its purpose. The quantity, unit and purpose are all clear."
         }
       ]
     },
-    fallback: '这个问题我们先问问老师，或者看看图示。'
+    "fallback": "Let us ask the teacher or look at the diagram together."
   };
 
   root.FRUIT_CONTENT = deepFreeze(content);
@@ -974,10 +1136,10 @@ button { min-width: 44px; min-height: 44px !important; }
     composition: function (value) {
       requireTenths(value);
       var whole = Math.floor(value / 10), tenths = value % 10;
-      if (tenths === 0) return '正好 ' + whole + ' 元，没有不足 1 元的部分';
+      if (tenths === 0) return 'Exactly ' + whole + ' yuan, with no part smaller than 1 yuan.';
       var price = whole + '.' + tenths;
-      if (whole === 0) return price + ' 元是 ' + tenths + ' 角，也就是 ' + tenths + ' 个 0.1 元。';
-      return price + ' 元是 ' + whole + ' 元 ' + tenths + ' 角，也就是 ' + whole + ' 个 1 元加 ' + tenths + ' 个 0.1 元。';
+      if (whole === 0) return price + ' yuan is ' + tenths + ' jiao: ' + tenths + (tenths === 1 ? ' lot' : ' lots') + ' of 0.1 yuan.';
+      return price + ' yuan is ' + whole + ' yuan and ' + tenths + ' jiao: ' + whole + (whole === 1 ? ' lot' : ' lots') + ' of 1 yuan plus ' + tenths + (tenths === 1 ? ' lot' : ' lots') + ' of 0.1 yuan.';
     },
     escapeHTML: function (value) {
       return String(value).replace(/[&<>"']/g, function (character) {
@@ -999,14 +1161,14 @@ button { min-width: 44px; min-height: 44px !important; }
 
   function create(content) {
     if (!content || !Array.isArray(content.questions) || content.questions.length !== 10) {
-      throw new TypeError('课后练习需要固定的十道题。');
+      throw new TypeError('Practice needs exactly ten fixed questions.');
     }
     const questions = content.questions;
     const groups = content.groups || [];
     questions.forEach((question) => {
       const ids = question.options.map((option) => option.id);
       if (new Set(ids).size !== ids.length || !ids.includes(question.correctId)) {
-        throw new TypeError('题目选项需要唯一编号及有效答案。');
+        throw new TypeError('Each option needs a unique ID and a valid correct answer.');
       }
     });
     let index = 0;
@@ -1079,51 +1241,51 @@ button { min-width: 44px; min-height: 44px !important; }
     }
     function progress() {
       const lit = correctCount();
-      return `<section class="practice-progress" aria-label="单位条进度"><div class="practice-meter-label"><strong>把十小格，连成一整条。</strong><span>整条代表1元</span></div><div class="practice-meter" role="progressbar" aria-label="答对一题点亮一格" aria-valuemin="0" aria-valuemax="10" aria-valuenow="${lit}">${Array.from({length:10}, (_, i) => `<span class="practice-cell${i < lit ? ' is-lit' : ''}" aria-hidden="true"></span>`).join('')}</div><p class="practice-note">每格代表0.1元，也就是1角。答对一题，点亮一格。</p></section>`;
+      return `<section class="practice-progress" aria-label="Unit-bar progress"><div class="practice-meter-label"><strong>Fill ten cells to make one whole bar.</strong><span>The whole bar represents 1 yuan</span></div><div class="practice-meter" role="progressbar" aria-label="Each correct answer lights one cell" aria-valuemin="0" aria-valuemax="10" aria-valuenow="${lit}">${Array.from({length:10}, (_, i) => `<span class="practice-cell${i < lit ? ' is-lit' : ''}" aria-hidden="true"></span>`).join('')}</div><p class="practice-note">Each cell is 0.1 yuan, or 1 jiao. Each correct answer lights one cell.</p></section>`;
     }
     function diagram(question) {
       if (!question.diagram) return '';
       const amount = question.diagram.amount;
       if (question.diagram.type !== 'money' || !Number.isInteger(amount) || amount < 1 || amount > 9) {
-        throw new TypeError('练习图示必须是一条十等分的单位条。');
+        throw new TypeError('A practice diagram must be one bar divided into ten equal parts.');
       }
-      return `<figure class="practice-diagram"><figcaption>整条代表1元，平均分成10份；每格是0.1元。</figcaption><div class="money-bar" role="list" aria-label="1元单位条，请观察哪些格子涂色">${Array.from({length:10}, (_, i) => `<span class="tenth${i < amount ? ' filled' : ''}" role="listitem" aria-label="第${i+1}格，${i < amount ? '已涂色' : '未涂色'}"></span>`).join('')}</div></figure>`;
+      return `<figure class="practice-diagram"><figcaption>The whole bar represents 1 yuan. It has 10 equal cells. Each cell is 0.1 yuan.</figcaption><div class="money-bar" role="list" aria-label="A 1-yuan bar. Look at the shaded cells.">${Array.from({length:10}, (_, i) => `<span class="tenth${i < amount ? ' filled' : ''}" role="listitem" aria-label="Cell ${i+1}, ${i < amount ? 'shaded' : 'not shaded'}"></span>`).join('')}</div></figure>`;
     }
     function feedback(question, record) {
       if (!record.feedback) return '';
       if (record.feedback === 'hint') {
-        return `<div class="practice-feedback is-hint" role="status"><strong>再想一想，还可以选一次。</strong><p>${escapeHTML(question.hint)}</p></div>`;
+        return `<div class="practice-feedback is-hint" role="status"><strong>Think again. You can try once more.</strong><p>${escapeHTML(question.hint)}</p></div>`;
       }
       if (record.correct) {
-        return `<div class="practice-feedback is-correct" role="status"><strong>对！这一格点亮了。</strong><p>${escapeHTML(question.explanation)}</p></div>`;
+        return `<div class="practice-feedback is-correct" role="status"><strong>Correct! One more cell is lit.</strong><p>${escapeHTML(question.explanation)}</p></div>`;
       }
-      return `<div class="practice-feedback is-reveal" role="status"><strong>一起核对：${escapeHTML(correctOption(question).text)}</strong><p>${escapeHTML(question.explanation)}</p><p class="practice-note">这道题的格子暂时没有点亮。看懂解释，再继续练习。</p></div>`;
+      return `<div class="practice-feedback is-reveal" role="status"><strong>Let us check: ${escapeHTML(correctOption(question).text)}</strong><p>${escapeHTML(question.explanation)}</p><p class="practice-note">This cell is not lit yet. Read the explanation, then continue.</p></div>`;
     }
     function guide() {
-      if (finished) return correctCount() === questions.length ? '你集满了1元！十个0.1元合起来是1元。再回顾一下，小数怎样帮助我们解释数量、比较价钱和联系生活。' : '还有一些格子等你点亮。先回顾解释，再从第一题试一试。';
+      if (finished) return correctCount() === questions.length ? 'You completed a 1-yuan bar! Ten 0.1-yuan parts make 1 yuan. Let us review how decimals help us describe quantities, compare prices and explain everyday examples.' : 'Some cells are still waiting to be lit. Read the explanations, then try again from the first question.';
       const question = questions[index];
       const record = records[index];
-      if (record.feedback === 'hint') return `再想一想，还可以选一次。${question.hint}`;
-      if (record.feedback === 'correct') return `对！${question.explanation}`;
-      if (record.feedback === 'reveal') return `一起核对：${correctOption(question).text}。${question.explanation}`;
-      return '先读题、想清楚，再选择。需要时可以回到课堂看看图示。';
+      if (record.feedback === 'hint') return `Think again. You can try once more. ${question.hint}`;
+      if (record.feedback === 'correct') return `Correct! ${question.explanation}`;
+      if (record.feedback === 'reveal') return `Let us check: ${correctOption(question).text}. ${question.explanation}`;
+      return 'Read, think, then choose. You can return to the lesson to look at the diagrams.';
     }
     function render() {
-      const note = '<p class="practice-note practice-privacy">刷新会重新开始。不输入姓名，不记录成绩。</p>';
+      const note = '<p class="practice-note practice-privacy">Refreshing starts again. No names or results are saved.</p>';
       if (finished) {
         const complete = correctCount() === questions.length;
-        return `<section id="practice-stage" class="stage-card practice-card practice-summary"><header class="practice-header"><p class="eyebrow">课后练习 · 一起回顾</p><h2 id="practice-question-title" tabindex="-1" class="practice-summary-title">${complete ? '你集满了1元' : '还有一些格子等你点亮'}</h2><p class="practice-summary-note">${complete ? '十个0.1元，也就是十个1角，合起来正好是1元。' : '没有点亮的格子，表示对应题目还可以再练一练。先回顾解释，再试一次。'}</p></header>${progress()}<div class="practice-reviews">${groups.map((group) => `<article class="practice-review"><h3>${escapeHTML(group.title)}</h3><p>${escapeHTML(group.review)}</p></article>`).join('')}</div>${note}<div class="practice-actions"><button type="button" class="primary-button" data-action="practice-reset">再练一次</button><button type="button" class="secondary-button" data-action="step" data-value="1">回到课堂看看</button></div></section>`;
+        return `<section id="practice-stage" class="stage-card practice-card practice-summary"><header class="practice-header"><p class="eyebrow">Practice · Let us review</p><h2 id="practice-question-title" tabindex="-1" class="practice-summary-title">${complete ? 'You completed a 1-yuan bar!' : 'Some cells are waiting to be lit'}</h2><p class="practice-summary-note">${complete ? 'Ten 0.1-yuan parts, or ten 1-jiao parts, make exactly 1 yuan.' : 'An unlit cell shows a question to practise again. Read the explanation, then have another try.'}</p></header>${progress()}<div class="practice-reviews">${groups.map((group) => `<article class="practice-review"><h3>${escapeHTML(group.title)}</h3><p>${escapeHTML(group.review)}</p></article>`).join('')}</div>${note}<div class="practice-actions"><button type="button" class="primary-button" data-action="practice-reset">Try again</button><button type="button" class="secondary-button" data-action="step" data-value="1">Back to the lesson</button></div></section>`;
       }
       const question = questions[index];
       const record = records[index];
       const group = groups.find((item) => item.id === question.group);
       const options = optionsFor(index);
-      return `<section id="practice-stage" class="stage-card practice-card"><header class="practice-header"><p class="eyebrow">课后练习 · 8–10分钟</p><h2 class="practice-title">再练一练，把小数说清楚。</h2>${note}</header>${progress()}<div class="practice-settings"><label class="practice-shuffle-label"><input type="checkbox" data-action="practice-shuffle"${shuffle ? ' checked' : ''}${started() ? ' disabled' : ''}>打乱选项顺序</label><span class="practice-note">${started() ? '本轮顺序已固定；重新练习时可以调整。' : '默认保持固定顺序，便于一起讲解。'}</span></div><section class="practice-question" aria-labelledby="practice-question-title"><p class="practice-group">${escapeHTML(question.group)}组 · ${escapeHTML(group ? group.title : '')} <span>第${index+1}题 / 共10题</span></p><h3 id="practice-question-title" tabindex="-1" class="practice-question-title">${escapeHTML(question.prompt)}</h3>${diagram(question)}<div class="practice-options" role="group" aria-label="请选择一个答案">${options.map((option) => {
+      return `<section id="practice-stage" class="stage-card practice-card"><header class="practice-header"><p class="eyebrow">After-class practice · 8–10 minutes</p><h2 class="practice-title">Let us practise decimals.</h2>${note}</header>${progress()}<div class="practice-settings"><label class="practice-shuffle-label"><input type="checkbox" data-action="practice-shuffle"${shuffle ? ' checked' : ''}${started() ? ' disabled' : ''}>Shuffle the choices</label><span class="practice-note">${started() ? 'The order is fixed for this round. You can change it when you start again.' : 'Choices stay in order unless you shuffle them.'}</span></div><section class="practice-question" aria-labelledby="practice-question-title"><p class="practice-group">${escapeHTML(group ? group.title : 'Practice')} <span>Question ${index+1} of 10</span></p><h3 id="practice-question-title" tabindex="-1" class="practice-question-title">${escapeHTML(question.prompt)}</h3>${diagram(question)}<div class="practice-options" role="group" aria-label="Choose one answer">${options.map((option) => {
         const selected = record.chosenIds.includes(option.id);
         const correct = record.resolved && option.id === question.correctId;
         const disabled = record.resolved || selected;
         return `<button type="button" class="practice-option${selected ? ' is-selected' : ''}${selected && !correct ? ' is-attempted' : ''}${correct ? ' is-correct' : ''}" data-action="practice-answer" data-value="${escapeHTML(option.id)}"${disabled ? ' disabled' : ''}>${escapeHTML(option.text)}</button>`;
-      }).join('')}</div>${feedback(question, record)}</section><div class="practice-actions"><button type="button" class="primary-button" data-action="practice-next"${record.resolved ? '' : ' disabled'}>${index === questions.length-1 ? '看看我的单位条' : '下一题 →'}</button></div></section>`;
+      }).join('')}</div>${feedback(question, record)}</section><div class="practice-actions"><button type="button" class="primary-button" data-action="practice-next"${record.resolved ? '' : ' disabled'}>${index === questions.length-1 ? 'See my unit bar' : 'Next question →'}</button></div></section>`;
     }
     return Object.freeze({
       get state() {
@@ -1144,11 +1306,11 @@ button { min-width: 44px; min-height: 44px !important; }
   function create({synth,Utterance,onStatus=()=>{},retryDelays=[150,450,900,1800],timeout=2500}){
     let serial=0, pendingCancel=null, message='';
     const report=(text)=>{message=text;onStatus(text);};
-    const localVoice=()=>synth?.getVoices().find(v=>v.localService&&/^zh(?:-|_)/i.test(v.lang));
-    function stop(){serial++;if(pendingCancel){const cancel=pendingCancel;pendingCancel=null;cancel();}synth?.cancel();if(message)report('朗读已停止，字幕仍可阅读。');}
+    const localVoice=()=>synth?.getVoices().find(v=>v.localService&&/^en(?:-|_)/i.test(v.lang));
+    function stop(){serial++;if(pendingCancel){const cancel=pendingCancel;pendingCancel=null;cancel();}synth?.cancel();if(message)report('Reading stopped. You can still read the text.');}
     function waitForVoice(){
       const ready=localVoice();if(ready)return Promise.resolve(ready);
-      report('正在准备本地中文语音，字幕可以先看。');
+      report('Preparing a local English voice. You can read the text while you wait.');
       return new Promise(resolve=>{
         let done=false;const timers=[];
         const finish=(voice)=>{if(done)return;done=true;timers.forEach(clearTimeout);synth.removeEventListener?.('voiceschanged',check);pendingCancel=null;resolve(voice);};
@@ -1162,15 +1324,15 @@ button { min-width: 44px; min-height: 44px !important; }
     }
     async function speak(text){
       stop();const request=serial;
-      if(!synth||!Utterance){report('当前环境不支持本地朗读，请使用字幕。');return false;}
+      if(!synth||!Utterance){report('Read-aloud is not supported here. Please read the on-screen text.');return false;}
       const voice=await waitForVoice();
       if(request!==serial)return false;
-      if(!voice){report('当前环境没有可用的本地中文语音，请使用字幕。');return false;}
+      if(!voice){report('No local English voice is available. Please read the on-screen text.');return false;}
       const u=new Utterance(String(text));u.voice=voice;u.lang=voice.lang;u.rate=.87;
-      u.onstart=()=>{if(request===serial)report('正在用本地中文语音朗读。');};
-      u.onend=()=>{if(request===serial)report('朗读结束，可以再听一遍。');};
-      u.onerror=()=>{if(request===serial)report('本次朗读未能播放，请使用字幕或再听一遍。');};
-      report('本地中文语音已准备好。');synth.speak(u);return true;
+      u.onstart=()=>{if(request===serial)report('Reading with a local English voice.');};
+      u.onend=()=>{if(request===serial)report('Reading finished. You can listen again.');};
+      u.onerror=()=>{if(request===serial)report('The audio could not play. Please read the text or try listening again.');};
+      report('The local English voice is ready.');synth.speak(u);return true;
     }
     // Trigger browser voice discovery before the first click, without reporting an empty list as failure.
     synth?.getVoices();
@@ -1185,21 +1347,21 @@ button { min-width: 44px; min-height: 44px !important; }
   'use strict';
   const C = window.FRUIT_CONTENT;
   const M = window.DecimalMath;
-  if (!C || !M) { document.getElementById('app').textContent = '教学内容未能加载，请确认所有网页文件在同一文件夹中。'; return; }
+  if (!C || !M) { document.getElementById('app').textContent = 'The lesson could not load. Keep all website files in the same folder.'; return; }
   const $ = (s) => document.querySelector(s);
   const esc = M.escapeHTML;
   const state = {step:0, extra:false, transferOpen:false, transferAnswer:false, diagram:false, representation:'full', hint:false, answer:false, selectedShop:null, ribbon:false, level:'basic', question:null, questionHint:false, questionAnswer:false, speech:'', voice:false, draft:'', purpose:'', example:null, error:'', visited:new Set()};
-  const steps = [{title:'欢迎光临',label:'逛逛水果铺'},{title:'任务一',label:'说清价钱'},{title:'任务二',label:'帮我选一家'},{title:'任务三',label:'把小数带回家'},{title:'课后练习',label:'课后练一练'}];
+  const steps = [{title:'Welcome',label:'Visit the shop'},{title:'Task 1',label:'Explain a price'},{title:'Task 2',label:'Choose a shop'},{title:'Task 3',label:'Decimals in life'},{title:'Practice',label:'After-class practice'}];
   const fruit = () => C.fruits[0];
   const amount = () => fruit().prices.original;
   const practice = window.FruitPractice.create(C.practice);
-  document.getElementById('transfer-teacher-price').textContent=M.price(C.transfer.amount)+'元'+C.transfer.name;
+  document.getElementById('transfer-teacher-price').textContent=C.transfer.name+' at '+M.price(C.transfer.amount)+' yuan';
   const interpolate = (s) => {
     const a=amount(), whole=Math.floor(a/10), tenths=a%10;
     return String(s||'').replaceAll('{price}',M.price(a)).replaceAll('{whole}',String(whole)).replaceAll('{tenths}',String(tenths));
   };
-  const art = (id,cls='fruit-art') => `<svg class="${cls}" viewBox="0 0 220 160" role="img" aria-label="${id==='apple'?'苹果':id==='orange'?'橙子':'梨'}插图"><ellipse cx="110" cy="144" rx="66" ry="9" fill="#235d4c" opacity=".07"/>${id==='apple'?'<path d="M111 42c-10-17-33-21-51-10-30 18-26 55-10 82 13 23 31 34 51 25 7-3 13-3 20 0 20 9 38-2 51-25 16-27 20-64-10-82-18-11-41-7-51 10z" fill="#d97555"/><path d="M111 44c-3-17 0-26 8-34" fill="none" stroke="#72523c" stroke-width="8" stroke-linecap="round"/><path d="M119 23c14-21 35-19 43-8-11 14-28 20-43 8z" fill="#63876a"/><path d="M64 56c-12 12-15 25-12 38" stroke="#f3b291" stroke-width="8" fill="none" stroke-linecap="round"/>':id==='orange'?'<circle cx="110" cy="85" r="58" fill="#eda64d"/><path d="M111 30c-1-10 0-17 4-24" stroke="#71563c" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M115 21c15-18 36-15 42-4-12 12-26 14-42 4z" fill="#63876a"/><path d="M72 55c-12 8-17 18-18 31" stroke="#f7cf87" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="137" cy="94" r="2" fill="#d88c34"/><circle cx="149" cy="78" r="2" fill="#d88c34"/><circle cx="127" cy="117" r="2" fill="#d88c34"/>':'<path d="M92 35c-5 27-9 35-24 50-30 33-13 60 40 60 54 0 74-27 43-60-15-16-20-27-23-50-3-23-32-23-36 0z" fill="#c8cd70"/><path d="M108 21c-1-9 3-16 9-21" stroke="#72523c" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M118 17c17-16 34-12 39-2-13 10-25 12-39 2z" fill="#63876a"/><path d="M82 87c-14 15-18 26-9 37" stroke="#e5e7a6" stroke-width="8" fill="none" stroke-linecap="round"/>'}</svg>`;
-  const keeper = () => `<svg class="keeper-portrait" viewBox="0 0 140 140" role="img" aria-label="戴绿色围裙的小林店主卡通形象"><circle cx="70" cy="70" r="68" fill="#e9eee1"/><path d="M24 140c1-36 18-49 46-49s45 13 46 49" fill="#d4a985"/><path d="M45 104l10-10h30l10 10 9 36H36z" fill="#356755"/><path d="M52 99v22h36V99" fill="none" stroke="#f9f6eb" stroke-width="5"/><ellipse cx="70" cy="59" rx="33" ry="39" fill="#efc8a2"/><path d="M37 57c-3-34 15-45 34-45 27 0 37 17 33 44-11-1-18-11-22-21-11 15-28 19-45 22z" fill="#4e5141"/><path d="M39 34h65l-6-18H45z" fill="#356755"/><path d="M30 34h80" stroke="#356755" stroke-width="9" stroke-linecap="round"/><path d="M58 62h1m22 0h1" stroke="#4a4537" stroke-width="4" stroke-linecap="round"/><path d="M61 78q9 8 18 0" fill="none" stroke="#a4624d" stroke-width="3" stroke-linecap="round"/><circle cx="49" cy="73" r="5" fill="#e9a795" opacity=".7"/><circle cx="91" cy="73" r="5" fill="#e9a795" opacity=".7"/></svg>`;
+  const art = (id,cls='fruit-art') => `<svg class="${cls}" viewBox="0 0 220 160" role="img" aria-label="${id==='apple'?'Apple':id==='orange'?'Orange':'Pear'} illustration"><ellipse cx="110" cy="144" rx="66" ry="9" fill="#235d4c" opacity=".07"/>${id==='apple'?'<path d="M111 42c-10-17-33-21-51-10-30 18-26 55-10 82 13 23 31 34 51 25 7-3 13-3 20 0 20 9 38-2 51-25 16-27 20-64-10-82-18-11-41-7-51 10z" fill="#d97555"/><path d="M111 44c-3-17 0-26 8-34" fill="none" stroke="#72523c" stroke-width="8" stroke-linecap="round"/><path d="M119 23c14-21 35-19 43-8-11 14-28 20-43 8z" fill="#63876a"/><path d="M64 56c-12 12-15 25-12 38" stroke="#f3b291" stroke-width="8" fill="none" stroke-linecap="round"/>':id==='orange'?'<circle cx="110" cy="85" r="58" fill="#eda64d"/><path d="M111 30c-1-10 0-17 4-24" stroke="#71563c" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M115 21c15-18 36-15 42-4-12 12-26 14-42 4z" fill="#63876a"/><path d="M72 55c-12 8-17 18-18 31" stroke="#f7cf87" stroke-width="8" fill="none" stroke-linecap="round"/><circle cx="137" cy="94" r="2" fill="#d88c34"/><circle cx="149" cy="78" r="2" fill="#d88c34"/><circle cx="127" cy="117" r="2" fill="#d88c34"/>':'<path d="M92 35c-5 27-9 35-24 50-30 33-13 60 40 60 54 0 74-27 43-60-15-16-20-27-23-50-3-23-32-23-36 0z" fill="#c8cd70"/><path d="M108 21c-1-9 3-16 9-21" stroke="#72523c" stroke-width="6" fill="none" stroke-linecap="round"/><path d="M118 17c17-16 34-12 39-2-13 10-25 12-39 2z" fill="#63876a"/><path d="M82 87c-14 15-18 26-9 37" stroke="#e5e7a6" stroke-width="8" fill="none" stroke-linecap="round"/>'}</svg>`;
+  const keeper = () => `<svg class="keeper-portrait" viewBox="0 0 140 140" role="img" aria-label="Mr Lin, the cartoon shopkeeper in a green apron"><circle cx="70" cy="70" r="68" fill="#e9eee1"/><path d="M24 140c1-36 18-49 46-49s45 13 46 49" fill="#d4a985"/><path d="M45 104l10-10h30l10 10 9 36H36z" fill="#356755"/><path d="M52 99v22h36V99" fill="none" stroke="#f9f6eb" stroke-width="5"/><ellipse cx="70" cy="59" rx="33" ry="39" fill="#efc8a2"/><path d="M37 57c-3-34 15-45 34-45 27 0 37 17 33 44-11-1-18-11-22-21-11 15-28 19-45 22z" fill="#4e5141"/><path d="M39 34h65l-6-18H45z" fill="#356755"/><path d="M30 34h80" stroke="#356755" stroke-width="9" stroke-linecap="round"/><path d="M58 62h1m22 0h1" stroke="#4a4537" stroke-width="4" stroke-linecap="round"/><path d="M61 78q9 8 18 0" fill="none" stroke="#a4624d" stroke-width="3" stroke-linecap="round"/><circle cx="49" cy="73" r="5" fill="#e9a795" opacity=".7"/><circle cx="91" cy="73" r="5" fill="#e9a795" opacity=".7"/></svg>`;
   function announce(text){ $('#announcement').textContent=''; requestAnimationFrame(()=>{$('#announcement').textContent=text;}); }
   const speech = window.FruitSpeech.create({
     synth: window.speechSynthesis, Utterance: window.SpeechSynthesisUtterance,
@@ -1214,7 +1376,7 @@ button { min-width: 44px; min-height: 44px !important; }
   function clearTask(){state.diagram=false;state.representation='full';state.transferOpen=false;state.transferAnswer=false;state.hint=false;state.answer=false;state.selectedShop=null;state.ribbon=false;state.level='basic';state.question=null;state.questionHint=false;state.questionAnswer=false;state.error='';}
   function go(step){
     stop();state.step=step;clearTask();if(step)state.visited.add(step);
-    state.speech=step===4?practice.guide():step?interpolate(C.tasks[step].opening):'欢迎光临！今天，我们一起把价签上的小数说清楚，再找找生活里的小数。';
+    state.speech=step===4?practice.guide():step?interpolate(C.tasks[step].opening):'Welcome! Let us explain the decimals on price tags, then find decimals in everyday life.';
     history.replaceState(null,'',step===4?'#practice':'#task-'+step);
     render();speak(state.speech);(document.getElementById('stage-title')||document.getElementById('practice-question-title'))?.focus({preventScroll:true});window.scrollTo({top:0});
   }
@@ -1223,49 +1385,49 @@ button { min-width: 44px; min-height: 44px !important; }
     const rows=[];
     for(let i=0;i<whole+(tenths>0?1:0);i++){
       const count=i<whole?10:tenths;
-      rows.push(`<div class="bar-row"><span class="bar-label">1元</span><div class="money-bar" role="img" aria-label="一条代表1元，平均分成10份，涂色${count}份">${Array.from({length:10},(_,j)=>`<span class="tenth${j<count?' filled':''}"></span>`).join('')}</div></div>`);
+      rows.push(`<div class="bar-row"><span class="bar-label">1 yuan</span><div class="money-bar" role="img" aria-label="One bar represents 1 yuan in 10 equal parts, with ${count} parts shaded">${Array.from({length:10},(_,j)=>`<span class="tenth${j<count?' filled':''}"></span>`).join('')}</div></div>`);
     }
-    return `<div class="bar-stack">${rows.join('')}</div><p class="unit-label">每条代表 <strong>1元</strong>，平均分成10份；每一小格代表 <strong>0.1元＝1角</strong>。</p>`;
+    return `<div class="bar-stack">${rows.join('')}</div><p class="unit-label">Each bar is <strong>1 yuan</strong> in 10 equal parts. Each cell is <strong>0.1 yuan = 1 jiao</strong>.</p>`;
   }
-  function intro(){return `<section class="stage-area intro-stage"><div class="stage-card intro-grid"><div class="intro-copy"><p class="eyebrow">20分钟，一起发现小数的用处</p><h2 id="stage-title" class="intro-title" tabindex="-1">小小的数，<br>装着生活里的<br><span>大用途。</span></h2><p class="lead">价签上的2.3元，究竟是多少钱？<br>和小林店主一起，说一说、选一选、找一找。</p><button type="button" class="primary-button" data-action="start">开始逛水果铺 <span aria-hidden="true">→</span></button></div><div class="intro-art" aria-hidden="true"><div class="market-awning"></div><div class="shop-sign">今日新鲜 · 欢迎光临</div><div class="intro-fruits">${art('apple')}${art('orange')}${art('pear')}</div><div class="intro-ticket"><span>苹果一袋</span><strong>2.3 <small>元</small></strong></div><div class="market-shelf"></div></div></div><div class="goal-list"><div class="goal-item"><span class="goal-number">01</span><p>说清一个价钱</p></div><div class="goal-item"><span class="goal-number">02</span><p>说明一个选择</p></div><div class="goal-item"><span class="goal-number">03</span><p>联系自己的生活</p></div></div></section>`;}
+  function intro(){return `<section class="stage-area intro-stage"><div class="stage-card intro-grid"><div class="intro-copy"><p class="eyebrow">20 minutes to explore decimals</p><h2 id="stage-title" class="intro-title" tabindex="-1">Small decimals.<br><span>Everyday uses.</span></h2><p class="lead">What does 2.3 yuan on a price tag mean?<br>Join Mr Lin to explain, compare and explore.</p><button type="button" class="primary-button" data-action="start">Visit the fruit shop <span aria-hidden="true">→</span></button></div><div class="intro-art" aria-hidden="true"><div class="market-awning"></div><div class="shop-sign">Fresh today · Welcome!</div><div class="intro-fruits">${art('apple')}${art('orange')}${art('pear')}</div><div class="intro-ticket"><span>One bag of apples</span><strong>2.3 <small>yuan</small></strong></div><div class="market-shelf"></div></div></div><div class="goal-list"><div class="goal-item"><span class="goal-number">01</span><p>Explain a price</p></div><div class="goal-item"><span class="goal-number">02</span><p>Explain your choice</p></div><div class="goal-item"><span class="goal-number">03</span><p>Connect with your life</p></div></div></section>`;}
   function transferTask(){
     const t=C.transfer;
-    if(!M.validTransfer(t.amount))return '<div class="stage-card"><p>请返回苹果价签，继续解释数量。</p><button class="secondary-button" data-action="transfer-close">返回苹果价签</button></div>';
-    return `<div class="stage-card transfer-panel"><p class="eyebrow">换一种水果，试试同一个规则</p><div class="transfer-price">${art(t.fruitId)}<div><span>${esc(t.name)}一${esc(t.unit)}</span><strong>${M.price(t.amount)}元</strong></div></div><p>先说一说：有几个完整的1元，还有几个0.1元？</p>${moneyBars(t.amount)}<div class="task-actions"><button type="button" class="primary-button" data-action="transfer-answer">核对</button><button type="button" class="quiet-button" data-action="transfer-close">返回苹果价签</button></div>${state.transferAnswer?`<div class="answer-box" role="status">${esc(M.composition(t.amount))}</div>`:''}</div>`;
+    if(!M.validTransfer(t.amount))return '<div class="stage-card"><p>Go back to the apples and explain the price.</p><button class="secondary-button" data-action="transfer-close">Back to the apples</button></div>';
+    return `<div class="stage-card transfer-panel"><p class="eyebrow">A new fruit, the same rule</p><div class="transfer-price">${art(t.fruitId)}<div><span>${esc(t.name)} · 1 ${esc(t.unit)}</span><strong>${M.price(t.amount)} yuan</strong></div></div><p>Explain first: how many whole yuan, and how many 0.1-yuan parts?</p>${moneyBars(t.amount)}<div class="task-actions"><button type="button" class="primary-button" data-action="transfer-answer">Check</button><button type="button" class="quiet-button" data-action="transfer-close">Back to the apples</button></div>${state.transferAnswer?`<div class="answer-box" role="status">${esc(M.composition(t.amount))}</div>`:''}</div>`;
   }
   function taskOne(){
     if(state.transferOpen)return transferTask();
     const f=fruit(),a=amount(),mode=state.representation;
-    const controls=state.diagram?`<div class="representation-controls"><span class="muted">教师展示</span><div class="segmented" role="group" aria-label="任务一展示阶段">${[['full','完整画面'],['bars','单位条与小数'],['number','只看小数']].map(([id,label])=>`<button type="button" data-action="representation" data-value="${id}" class="${mode===id?'active':''}" aria-pressed="${mode===id}">${label}</button>`).join('')}</div><p class="representation-note">先联系图与数，再逐步隐藏；需要时可恢复完整画面。</p></div>`:'';
-    const context=mode==='full'?`<div class="market-controls"><span class="muted">点一点价签，看看数量</span></div><div class="fruit-grid core-only"><button type="button" class="fruit-card selected" data-action="fruit" aria-label="苹果，每袋2.3元，点击查看单位条">${art(f.id)}<span class="fruit-name">${esc(f.name)} <small>一${esc(f.unit)}</small></span><span class="price-ticket"><strong class="price-number">${M.price(a)}</strong><span class="price-unit">元</span></span><span class="fruit-caption">点击价签 · 看单位条</span></button></div>`:'';
-    const diagram=mode==='number'?'<p class="number-prompt">不看图，你能说清这个数表示多少钱吗？</p>':state.diagram?moneyBars(a):'<div class="empty-state"><span class="mini-bars" aria-hidden="true"><i></i><i></i><i></i></span><p>先说说你的想法，再点击价签看单位条。</p></div>';
-    const transfer=state.extra&&mode==='number'&&M.validTransfer(C.transfer.amount)?'<div class="transfer-entry"><button type="button" class="secondary-button" data-action="transfer-open">换一种水果，规则还成立吗</button></div>':'';
-    return `<div class="stage-card">${controls}${context}<div class="representation${mode==='number'?' number-only':''}"><h3>${mode==='full'?`${esc(f.name)}一${esc(f.unit)} `:''}<span class="accent-number">${M.price(a)}元</span></h3>${diagram}</div><div class="task-actions"><button type="button" class="secondary-button" data-action="hint">思考提示</button><button type="button" class="quiet-button" data-action="answer">核对价格组成</button></div>${state.hint?`<div class="hint-box" role="status">${esc(interpolate(C.tasks[1].hint))}</div>`:''}${state.answer?`<div class="answer-box" role="status">${esc(M.composition(a))}</div>`:''}${transfer}</div>`;
+    const controls=state.diagram?`<div class="representation-controls"><span class="muted">Teacher view</span><div class="segmented" role="group" aria-label="Task 1 display stages">${[['full','Full scene'],['bars','Bars and decimal'],['number','Decimal only']].map(([id,label])=>`<button type="button" data-action="representation" data-value="${id}" class="${mode===id?'active':''}" aria-pressed="${mode===id}">${label}</button>`).join('')}</div><p class="representation-note">Connect the picture and number, then gradually hide the picture. Restore the scene whenever needed.</p></div>`:'';
+    const context=mode==='full'?`<div class="market-controls"><span class="muted">Tap the price tag to explore the amount</span></div><div class="fruit-grid core-only"><button type="button" class="fruit-card selected" data-action="fruit" aria-label="Apples, 2.3 yuan per bag. Tap to see the unit bars.">${art(f.id)}<span class="fruit-name">${esc(f.name)} <small>per ${esc(f.unit)}</small></span><span class="price-ticket"><strong class="price-number">${M.price(a)}</strong><span class="price-unit">yuan</span></span><span class="fruit-caption">Tap the price tag to see the bars</span></button></div>`:'';
+    const diagram=mode==='number'?'<p class="number-prompt">Can you explain this amount without the picture?</p>':state.diagram?moneyBars(a):'<div class="empty-state"><span class="mini-bars" aria-hidden="true"><i></i><i></i><i></i></span><p>Share your ideas first. Then tap the price tag to see the unit bars.</p></div>';
+    const transfer=state.extra&&mode==='number'&&M.validTransfer(C.transfer.amount)?'<div class="transfer-entry"><button type="button" class="secondary-button" data-action="transfer-open">Does the rule work for another fruit?</button></div>':'';
+    return `<div class="stage-card">${controls}${context}<div class="representation${mode==='number'?' number-only':''}"><h3>${mode==='full'?`${esc(f.name)} per ${esc(f.unit)} `:''}<span class="accent-number">${M.price(a)} yuan</span></h3>${diagram}</div><div class="task-actions"><button type="button" class="secondary-button" data-action="hint">Hint</button><button type="button" class="quiet-button" data-action="answer">Check the parts</button></div>${state.hint?`<div class="hint-box" role="status">${esc(interpolate(C.tasks[1].hint))}</div>`:''}${state.answer?`<div class="answer-box" role="status">${esc(M.composition(a))}</div>`:''}${transfer}</div>`;
   }
   function priceDifference(){
-    return `<div class="difference-diagram"><p>整元部分都是2元，只看不足1元的部分：</p>${[{label:'A店：3角',count:3},{label:'B店：8角',count:8}].map(row=>`<div class="difference-row"><span class="difference-label">${row.label}</span><div class="difference-bar" role="img" aria-label="1元平均分成10份，涂色${row.count}份">${Array.from({length:10},(_,i)=>`<span class="difference-cell${i<3?' common':i<row.count?' difference':''}"></span>`).join('')}</div></div>`).join('')}<p>每条完整长度代表1元，每格0.1元＝1角；橙色的5格就是多出的5角。</p></div>`;
+    return `<div class="difference-diagram"><p>Both prices have 2 whole yuan. Compare the parts smaller than 1 yuan:</p>${[{label:'Shop A: 3 jiao',count:3},{label:'Shop B: 8 jiao',count:8}].map(row=>`<div class="difference-row"><span class="difference-label">${row.label}</span><div class="difference-bar" role="img" aria-label="1 yuan in 10 equal parts, with ${row.count} parts shaded">${Array.from({length:10},(_,i)=>`<span class="difference-cell${i<3?' common':i<row.count?' difference':''}"></span>`).join('')}</div></div>`).join('')}<p>Each whole bar is 1 yuan. Each cell is 0.1 yuan = 1 jiao. The 5 orange cells show the extra 5 jiao.</p></div>`;
   }
-  function taskTwo(){return `<div class="stage-card"><p class="shop-condition"><span class="badge">公平比一比</span> 同品种、同品质、同样一袋苹果，只比较价钱。</p><div class="comparison-grid">${[{id:'A',name:'小林水果铺',price:23},{id:'B',name:'街角水果铺',price:28}].map(v=>`<button type="button" class="shop-card${state.selectedShop===v.id?' selected':''}" data-action="shop" data-value="${v.id}" aria-pressed="${state.selectedShop===v.id}"><span class="shop-label">${v.id}店 · ${v.name}</span>${art('apple')}<span class="shop-price">${M.price(v.price)}<small>元</small></span><span class="shop-pack">同样一袋苹果</span><span class="shop-select-label">${state.selectedShop===v.id?'已选择 · 请说明理由':'我想选这家'}</span></button>`).join('')}</div>${state.selectedShop?`<div class="choice-prompt" role="status">你选择了${state.selectedShop}店。请先说一说：你是怎样比较的？</div>`:'<p class="choice-prompt">先选一家，再用价钱说明你的理由。</p>'}<div class="task-actions"><button type="button" class="secondary-button" data-action="hint">思考提示</button><button type="button" class="quiet-button" data-action="answer" ${!state.selectedShop?'disabled':''}>核对选择与价差</button></div>${state.hint?`<div class="hint-box" role="status">${esc(C.tasks[2].hint)}</div>`:''}${state.answer?`<div class="answer-box" role="status"><p class="equation">2.3元 <span>＜</span> 2.8元</p><strong>选择A店，可以少花5角钱。</strong>${priceDifference()}</div>`:''}</div>`;}
-  function taskThree(){return `<div class="stage-card"><div class="ribbon-wrap"><div class="board-tools"><h3>用丝带，看看0.7米有多长。</h3><span class="badge">完整一条是1米</span></div><div class="ribbon" role="img" aria-label="1米丝带平均分成10份${state.ribbon?'，其中7份涂色表示0.7米':'，尚未标出0.7米'}">${Array.from({length:10},(_,i)=>`<span class="ribbon-part${state.ribbon&&i<7?' filled':''}"></span>`).join('')}</div><div class="ruler-labels"><span>0</span><span>1米</span></div><p class="ribbon-caption">把1米平均分成10份，每份是0.1米。你会指出哪一段？</p><div class="task-actions"><button type="button" class="secondary-button" data-action="ribbon">${state.ribbon?'重新观察':'标出0.7米'}</button><button type="button" class="quiet-button" data-action="hint">思考提示</button><button type="button" class="quiet-button" data-action="answer">核对长度含义</button></div>${state.hint?`<div class="hint-box" role="status">${esc(C.tasks[3].hint)}</div>`:''}${state.answer?'<div class="answer-box" role="status">0.7米是7个0.1米，也就是十分之七米。这里的单位是“米”。</div>':''}</div><form class="reflection-form" id="reflection-form" novalidate><div class="reflection-heading"><span class="badge">每个人都想一想</span><h3>把小数带回自己的生活</h3></div><p>先在学习单上写自己的例子，再一起分享。这里记录一个匿名例子。</p><label for="decimal-example">我在哪里见过小数？它表示什么？</label><textarea id="decimal-example" maxlength="160" rows="2" placeholder="例如：我见过……，其中……表示……。" required>${esc(state.draft)}</textarea><label for="decimal-purpose">知道这个数，能帮我做什么？</label><textarea id="decimal-purpose" maxlength="160" rows="2" placeholder="它能帮助我……。" required>${esc(state.purpose)}</textarea><div class="form-actions"><span class="field-note">不用填写姓名；例子由老师和同学一起讨论。</span><button type="submit" class="primary-button">记录并分享</button></div>${state.error?`<p class="field-error" role="alert">${esc(state.error)}</p>`:''}</form>${state.example?`<div class="example-card" role="status"><span class="eyebrow">今天的生活例子</span><p>${esc(state.example.example)}</p><p><strong>它的用途：</strong>${esc(state.example.purpose)}</p><small>一起想想：小数表示的数量和单位是否说清楚了？</small></div>`:''}</div>`;}
+  function taskTwo(){return `<div class="stage-card"><p class="shop-condition"><span class="badge">A fair comparison</span> Same variety, quality and amount of apples in each bag. Compare only the price.</p><div class="comparison-grid">${[{id:'A',name:'Mr Lin Fruit Shop',price:23},{id:'B',name:'Corner Fruit Shop',price:28}].map(v=>`<button type="button" class="shop-card${state.selectedShop===v.id?' selected':''}" data-action="shop" data-value="${v.id}" aria-pressed="${state.selectedShop===v.id}"><span class="shop-label">Shop ${v.id} · ${v.name}</span>${art('apple')}<span class="shop-price">${M.price(v.price)}<small>yuan</small></span><span class="shop-pack">The same amount in each bag</span><span class="shop-select-label">${state.selectedShop===v.id?'Selected · Explain why':'Choose this shop'}</span></button>`).join('')}</div>${state.selectedShop?`<div class="choice-prompt" role="status">You chose Shop ${state.selectedShop}. Explain first: how did you compare the prices?</div>`:'<p class="choice-prompt">Choose a shop, then use the prices to explain why.</p>'}<div class="task-actions"><button type="button" class="secondary-button" data-action="hint">Hint</button><button type="button" class="quiet-button" data-action="answer" ${!state.selectedShop?'disabled':''}>Check the choice and saving</button></div>${state.hint?`<div class="hint-box" role="status">${esc(C.tasks[2].hint)}</div>`:''}${state.answer?`<div class="answer-box" role="status"><p class="equation">2.3 yuan <span>＜</span> 2.8 yuan</p><strong>Choose Shop A to save 5 jiao.</strong>${priceDifference()}</div>`:''}</div>`;}
+  function taskThree(){return `<div class="stage-card"><div class="ribbon-wrap"><div class="board-tools"><h3>How long is 0.7 m of ribbon?</h3><span class="badge">The whole ribbon is 1 m</span></div><div class="ribbon" role="img" aria-label="A 1-metre ribbon in 10 equal parts${state.ribbon?', with 7 parts shaded to show 0.7 m':', with 0.7 m not yet marked'}">${Array.from({length:10},(_,i)=>`<span class="ribbon-part${state.ribbon&&i<7?' filled':''}"></span>`).join('')}</div><div class="ruler-labels"><span>0</span><span>1 m</span></div><p class="ribbon-caption">Divide 1 m into 10 equal parts. Each part is 0.1 m. Which section would you point to?</p><div class="task-actions"><button type="button" class="secondary-button" data-action="ribbon">${state.ribbon?'Clear the shading':'Mark 0.7 m'}</button><button type="button" class="quiet-button" data-action="hint">Hint</button><button type="button" class="quiet-button" data-action="answer">Check the length</button></div>${state.hint?`<div class="hint-box" role="status">${esc(C.tasks[3].hint)}</div>`:''}${state.answer?'<div class="answer-box" role="status">0.7 m is seven 0.1-metre parts, or seven tenths of a metre. The unit here is metres.</div>':''}</div><form class="reflection-form" id="reflection-form" novalidate><div class="reflection-heading"><span class="badge">Everyone has an example</span><h3>Decimals in your life</h3></div><p>First write your own example on the worksheet. Then share it. The teacher can display one example here, without a name.</p><label for="decimal-example">Where have I seen a decimal? What does it mean?</label><textarea id="decimal-example" maxlength="160" rows="2" placeholder="For example: I saw ... . The number ... means ... ." required>${esc(state.draft)}</textarea><label for="decimal-purpose">How does knowing this number help me?</label><textarea id="decimal-purpose" maxlength="160" rows="2" placeholder="It helps me ... ." required>${esc(state.purpose)}</textarea><div class="form-actions"><span class="field-note">No names needed. Discuss the example with your teacher and classmates.</span><button type="submit" class="primary-button">Display and discuss</button></div>${state.error?`<p class="field-error" role="alert">${esc(state.error)}</p>`:''}</form>${state.example?`<div class="example-card" role="status"><span class="eyebrow">Our everyday example</span><p>${esc(state.example.example)}</p><p><strong>How it helps: </strong>${esc(state.example.purpose)}</p><small>Discuss: are the amount and unit clear?</small></div>`:''}</div>`;}
   function renderGuide(){
     let aside=$('.guide-panel');if(!aside)return;
     const prior=aside.contains(document.activeElement)?{action:document.activeElement.dataset.action,value:document.activeElement.dataset.value}:null;
     const task=state.transferOpen?null:C.tasks[state.step];
     const qs=task?.questions[state.level]||[];
     const q=state.question==null?null:qs[state.question];
-    aside.innerHTML=`<section class="shopkeeper-card"><div class="keeper-head">${keeper()}<div><p class="eyebrow">水果铺的小帮手</p><h3 class="keeper-name">小林店主</h3><span class="muted">一起听，一起想</span></div></div><div class="speech-bubble" aria-live="polite">${esc(state.speech)}</div><p class="voice-message" id="voice-message" role="status">${esc(speech.status())}</p><div class="speech-actions"><button type="button" class="quiet-button" data-action="replay">再听一遍</button><button type="button" class="quiet-button" data-action="stop">停止</button></div></section>${task?`<section class="question-bank"><div class="question-heading"><h3>再问一步</h3><span class="muted">先想，再展开</span></div><div class="level-tabs" role="group" aria-label="问题层次">${[['basic','基础'],['apply','应用'],['extend','拓展']].map(([id,name])=>`<button type="button" data-action="level" data-value="${id}" class="${state.level===id?'active':''}" aria-pressed="${state.level===id}">${name}</button>`).join('')}</div><div class="question-list">${qs.map((v,i)=>`<button type="button" class="question-card${state.question===i?' active':''}" data-action="question" data-value="${i}" aria-expanded="${state.question===i}">${esc(interpolate(v.q))}<span aria-hidden="true">${state.question===i?'−':'+'}</span></button>`).join('')}</div>${q?`<div class="question-reveal"><div class="task-actions"><button type="button" class="quiet-button" data-action="question-hint">给一点提示</button><button type="button" class="quiet-button" data-action="question-answer">展开回应</button></div>${state.questionHint?`<p class="hint-box">${esc(interpolate(q.hint))}</p>`:''}${state.questionAnswer?`<p class="question-answer" role="status">${esc(interpolate(q.answer))}</p>`:''}</div>`:''}<button type="button" class="fallback-button" data-action="fallback">还有别的问题？</button></section>`:state.step===4?'<section class="question-bank"><h3>想一想，再选择</h3><p>第一次没选对，先看提示再试一次。每题最多两次。</p><p>答对一题点亮一格，每格0.1元。刷新会重新开始，不记录成绩。</p></section>':state.transferOpen?'<section class="question-bank"><h3>把规则用到新价钱</h3><p>先说完整的1元，再说不足1元的部分。说完后再核对。</p></section>':'<section class="question-bank"><p class="eyebrow">今天的约定</p><h3>先说说你的想法。</h3><p>看看图，想一想，再把理由说给大家听。</p><p class="muted">每一个选择，都值得听听为什么。</p></section>'}`;
+    aside.innerHTML=`<section class="shopkeeper-card"><div class="keeper-head">${keeper()}<div><p class="eyebrow">Your fruit shop guide</p><h3 class="keeper-name">Mr Lin</h3><span class="muted">Listen and think together</span></div></div><div class="speech-bubble" aria-live="polite">${esc(state.speech)}</div><p class="voice-message" id="voice-message" role="status">${esc(speech.status())}</p><div class="speech-actions"><button type="button" class="quiet-button" data-action="replay">Listen again</button><button type="button" class="quiet-button" data-action="stop">Stop</button></div></section>${task?`<section class="question-bank"><div class="question-heading"><h3>Think a little further</h3><span class="muted">Think first, then open</span></div><div class="level-tabs" role="group" aria-label="Question levels">${[['basic','Explore'],['apply','Apply'],['extend','Extend']].map(([id,name])=>`<button type="button" data-action="level" data-value="${id}" class="${state.level===id?'active':''}" aria-pressed="${state.level===id}">${name}</button>`).join('')}</div><div class="question-list">${qs.map((v,i)=>`<button type="button" class="question-card${state.question===i?' active':''}" data-action="question" data-value="${i}" aria-expanded="${state.question===i}">${esc(interpolate(v.q))}<span aria-hidden="true">${state.question===i?'−':'+'}</span></button>`).join('')}</div>${q?`<div class="question-reveal"><div class="task-actions"><button type="button" class="quiet-button" data-action="question-hint">Show a hint</button><button type="button" class="quiet-button" data-action="question-answer">Show the answer</button></div>${state.questionHint?`<p class="hint-box">${esc(interpolate(q.hint))}</p>`:''}${state.questionAnswer?`<p class="question-answer" role="status">${esc(interpolate(q.answer))}</p>`:''}</div>`:''}<button type="button" class="fallback-button" data-action="fallback">Another question?</button></section>`:state.step===4?'<section class="question-bank"><h3>Think, then choose</h3><p>Need another try? Read the hint, then choose again. You have up to two tries per question.</p><p>Each correct answer lights one 0.1-yuan cell. Refresh starts again. No results are saved.</p></section>':state.transferOpen?'<section class="question-bank"><h3>Use the rule with a new price</h3><p>Explain the whole yuan, then the part smaller than 1 yuan. Check after you explain.</p></section>':'<section class="question-bank"><p class="eyebrow">Our learning promise</p><h3>Share your thinking first.</h3><p>Look at the picture. Think, then explain your reason to the class.</p><p class="muted">Every choice has a reason to discuss.</p></section>'}`;
     if(prior?.action)Array.from(aside.querySelectorAll('[data-action]')).find(el=>el.dataset.action===prior.action&&el.dataset.value===prior.value)?.focus({preventScroll:true});
   }
   function render(){
     const prior={action:document.activeElement?.dataset.action,value:document.activeElement?.dataset.value};
-    $('#lesson-nav').innerHTML=steps.map((s,i)=>`<button type="button" class="step-tab${state.step===i?' active':''}" data-action="step" data-value="${i}" ${state.step===i?'aria-current="step"':''}><span class="step-number">${i===0?'起点':String(i).padStart(2,'0')}</span><span class="step-label">${s.label}</span></button>`).join('');
-    const title=state.step===4?'课后练一练':state.step?C.tasks[state.step].title:'';
-    const subtitle=state.step===4?'8–10分钟，把课堂里的发现再用一遍':state.step?C.tasks[state.step].subtitle:'';
-    const header=state.step&&state.step!==4?`<div class="stage-header"><p class="eyebrow">${steps[state.step].title} / 认识小数</p><h2 id="stage-title" tabindex="-1">${esc(title)}</h2><p class="lead">${esc(subtitle)}</p></div>`:'';
-    $('#app').innerHTML=(state.step?`<section class="stage-area">${header}${state.step===4?practice.render():[null,taskOne,taskTwo,taskThree][state.step]()}</section>`:intro())+'<aside class="guide-panel" aria-label="店主与分层问题"></aside>';
+    $('#lesson-nav').innerHTML=steps.map((s,i)=>`<button type="button" class="step-tab${state.step===i?' active':''}" data-action="step" data-value="${i}" ${state.step===i?'aria-current="step"':''}><span class="step-number">${i===0?'Start':String(i).padStart(2,'0')}</span><span class="step-label">${s.label}</span></button>`).join('');
+    const title=state.step===4?'After-class practice':state.step?C.tasks[state.step].title:'';
+    const subtitle=state.step===4?'8–10 minutes to use what you learned':state.step?C.tasks[state.step].subtitle:'';
+    const header=state.step&&state.step!==4?`<div class="stage-header"><p class="eyebrow">${steps[state.step].title} / Exploring decimals</p><h2 id="stage-title" tabindex="-1">${esc(title)}</h2><p class="lead">${esc(subtitle)}</p></div>`:'';
+    $('#app').innerHTML=(state.step?`<section class="stage-area">${header}${state.step===4?practice.render():[null,taskOne,taskTwo,taskThree][state.step]()}</section>`:intro())+'<aside class="guide-panel" aria-label="Shopkeeper and guided questions"></aside>';
     renderGuide();
-    $('#lesson-footer').innerHTML=state.step===4?'<div class="lesson-status">课后练习 · 不记录成绩 · 刷新会重新开始</div><button type="button" class="quiet-button" data-action="step" data-value="3">← 回到课堂</button>':`<div class="lesson-status"><span class="status-dot"></span>${state.step?`任务 ${state.step} / 3 · ${steps[state.step].label}`:'先解释，再选择，最后联系生活。'}</div><div class="footer-actions">${state.step?'<button type="button" class="quiet-button" data-action="previous">← 上一步</button>':''}<button type="button" class="primary-button" data-action="${state.step===3?'summary':'next'}" ${state.step===3&&!state.example?'disabled title="先记录一个生活例子和它的用途"':''}>${state.step===0?'开始学习':state.step===3?'回顾今天的发现':'下一个任务 →'}</button></div>`;
-    $('#voice-toggle').textContent=state.voice?'朗读开启':'朗读关闭';$('#voice-toggle').setAttribute('aria-pressed',String(state.voice));
+    $('#lesson-footer').innerHTML=state.step===4?'<div class="lesson-status">Practice · No results saved · Refresh starts again</div><button type="button" class="quiet-button" data-action="step" data-value="3">← Back to the lesson</button>':`<div class="lesson-status"><span class="status-dot"></span>${state.step?`Task ${state.step} of 3 · ${steps[state.step].label}`:'Explain a price, make a choice, then connect it to life.'}</div><div class="footer-actions">${state.step?'<button type="button" class="quiet-button" data-action="previous">← Back</button>':''}<button type="button" class="primary-button" data-action="${state.step===3?'summary':'next'}" ${state.step===3&&!state.example?'disabled title="First add an everyday example and explain how it helps."':''}>${state.step===0?'Start learning':state.step===3?'Review our learning':'Next task →'}</button></div>`;
+    $('#voice-toggle').textContent=state.voice?'Read aloud: on':'Read aloud: off';$('#voice-toggle').setAttribute('aria-pressed',String(state.voice));
     if(prior.action)Array.from(document.querySelectorAll('[data-action]')).find(el=>el.dataset.action===prior.action&&el.dataset.value===prior.value)?.focus({preventScroll:true});
   }
   document.addEventListener('click',e=>{
@@ -1282,13 +1444,13 @@ button { min-width: 44px; min-height: 44px !important; }
     if(action==='cancel-reset'){$('#reset-dialog').close();return;}
     if(action==='confirm-reset'){
       state.draft='';state.purpose='';state.example=null;state.extra=false;state.visited.clear();practice.reset();$('#extra-prices').checked=false;
-      $('#reset-dialog').close();$('#teacher-dialog').close();go(0);announce('本次输入与进度已清除。');return;
+      $('#reset-dialog').close();$('#teacher-dialog').close();go(0);announce('Your examples and progress have been cleared.');return;
     }
     if(action==='voice'){state.voice=!state.voice;render();if(state.voice)speak(state.speech);else stop();return;}
     if(action==='stop'){stop();return;}
     if(action==='replay'){if(!state.voice){state.voice=true;render();}speak(state.speech);return;}
     if(action==='fullscreen'){
-      if(document.fullscreenElement)document.exitFullscreen?.();else document.documentElement.requestFullscreen?.().catch(()=>announce('可以使用浏览器的全屏菜单进行投影。'));return;
+      if(document.fullscreenElement)document.exitFullscreen?.();else document.documentElement.requestFullscreen?.().catch(()=>announce('You can use the full-screen option in your browser menu.'));return;
     }
     if(action==='fruit'){
       stop();state.diagram=true;state.representation='full';state.hint=false;state.answer=false;state.question=null;state.questionHint=false;state.questionAnswer=false;
@@ -1297,7 +1459,7 @@ button { min-width: 44px; min-height: 44px !important; }
     if(action==='transfer-open'){
       if(state.step!==1||!state.extra||state.representation!=='number'||!M.validTransfer(C.transfer.amount))return;
       stop();state.transferOpen=true;state.transferAnswer=false;state.hint=false;state.answer=false;state.question=null;state.questionHint=false;state.questionAnswer=false;
-      state.speech=`换成${C.transfer.name}了。${M.price(C.transfer.amount)}元里有几个完整的1元，还有几个0.1元？`;
+      state.speech=`Now try ${C.transfer.name.toLowerCase()}. In ${M.price(C.transfer.amount)} yuan, how many whole yuan and how many 0.1-yuan parts are there?`;
       render();speak(state.speech);return;
     }
     if(action==='transfer-answer'){
@@ -1317,7 +1479,7 @@ button { min-width: 44px; min-height: 44px !important; }
     if(action==='representation'){
       if(state.step!==1||!state.diagram||!['full','bars','number'].includes(val))return;
       stop();state.representation=val;state.hint=false;state.answer=false;state.question=null;state.questionHint=false;state.questionAnswer=false;
-      state.speech=val==='number'?`${M.price(amount())}元。不看图，你能说清这个数表示多少钱吗？`:val==='bars'?'看着单位条与小数，说一说它们怎样表示同一个数量。':interpolate(C.tasks[1].opening);
+      state.speech=val==='number'?`${M.price(amount())} yuan. Can you explain this amount without the picture?`:val==='bars'?'Look at the bars and decimal. Explain how they show the same amount.':interpolate(C.tasks[1].opening);
       render();return;
     }
     if(action==='hint'){state.hint=!state.hint;state.speech=interpolate(C.tasks[state.step].hint);render();speak(state.speech);return;}
@@ -1327,8 +1489,8 @@ button { min-width: 44px; min-height: 44px !important; }
       state.speech=state.answer?(state.step===1?M.composition(amount()):C.tasks[state.step].answer):interpolate(C.tasks[state.step].opening);
       render();if(state.answer)speak(state.speech);return;
     }
-    if(action==='shop'){state.selectedShop=val;state.answer=false;state.hint=false;state.speech='你是怎样比较的？先把理由说清楚，我们再一起核对。';render();speak(state.speech);return;}
-    if(action==='ribbon'){state.ribbon=!state.ribbon;state.answer=false;state.speech=state.ribbon?'看一看涂色部分。你能说清它与1米的关系吗？':C.tasks[3].opening;render();speak(state.speech);return;}
+    if(action==='shop'){state.selectedShop=val;state.answer=false;state.hint=false;state.speech='How did you compare the prices? Explain your reason before we check together.';render();speak(state.speech);return;}
+    if(action==='ribbon'){state.ribbon=!state.ribbon;state.answer=false;state.speech=state.ribbon?'Look at the shaded part. How does it relate to 1 metre?':C.tasks[3].opening;render();speak(state.speech);return;}
     if(action==='level'){stop();state.level=val;state.question=null;state.questionHint=false;state.questionAnswer=false;state.speech=interpolate(C.tasks[state.step].opening);renderGuide();return;}
     if(action==='question'){
       stop();state.question=state.question===Number(val)?null:Number(val);state.questionHint=false;state.questionAnswer=false;
@@ -1359,9 +1521,9 @@ button { min-width: 44px; min-height: 44px !important; }
   document.addEventListener('submit',e=>{
     if(e.target.id!=='reflection-form')return;e.preventDefault();
     if(!state.draft.trim()||!state.purpose.trim()){
-      state.error='请先写一个生活中的小数例子，再说说它的用途。';render();$(!state.draft.trim()?'#decimal-example':'#decimal-purpose').focus();return;
+      state.error='First write an everyday decimal example, then explain how it helps.';render();$(!state.draft.trim()?'#decimal-example':'#decimal-purpose').focus();return;
     }
-    state.example={example:state.draft.trim(),purpose:state.purpose.trim()};state.error='';state.speech='谢谢你的分享！除了购物，你还在哪里见过小数？它表示什么数量，能帮我们做什么？';render();speak(state.speech);announce('例子已临时展示，请一起讨论。');$('.example-card')?.scrollIntoView({behavior:'smooth',block:'nearest'});
+    state.example={example:state.draft.trim(),purpose:state.purpose.trim()};state.error='';state.speech='Thank you for sharing! Where else have you seen decimals? What do they measure, and how do they help us?';render();speak(state.speech);announce('The example is displayed for this session. Discuss it together.');$('.example-card')?.scrollIntoView({behavior:'smooth',block:'nearest'});
   });
   window.addEventListener('pagehide',()=>{stop();state.draft='';state.purpose='';state.example=null;practice.reset();});
   window.addEventListener('pageshow',e=>{if(e.persisted){if(state.step===4)state.speech=practice.guide();render();}});

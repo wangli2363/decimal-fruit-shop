@@ -8,14 +8,14 @@
 
   function create(content) {
     if (!content || !Array.isArray(content.questions) || content.questions.length !== 10) {
-      throw new TypeError('课后练习需要固定的十道题。');
+      throw new TypeError('Practice needs exactly ten fixed questions.');
     }
     const questions = content.questions;
     const groups = content.groups || [];
     questions.forEach((question) => {
       const ids = question.options.map((option) => option.id);
       if (new Set(ids).size !== ids.length || !ids.includes(question.correctId)) {
-        throw new TypeError('题目选项需要唯一编号及有效答案。');
+        throw new TypeError('Each option needs a unique ID and a valid correct answer.');
       }
     });
     let index = 0;
@@ -88,51 +88,51 @@
     }
     function progress() {
       const lit = correctCount();
-      return `<section class="practice-progress" aria-label="单位条进度"><div class="practice-meter-label"><strong>把十小格，连成一整条。</strong><span>整条代表1元</span></div><div class="practice-meter" role="progressbar" aria-label="答对一题点亮一格" aria-valuemin="0" aria-valuemax="10" aria-valuenow="${lit}">${Array.from({length:10}, (_, i) => `<span class="practice-cell${i < lit ? ' is-lit' : ''}" aria-hidden="true"></span>`).join('')}</div><p class="practice-note">每格代表0.1元，也就是1角。答对一题，点亮一格。</p></section>`;
+      return `<section class="practice-progress" aria-label="Unit-bar progress"><div class="practice-meter-label"><strong>Fill ten cells to make one whole bar.</strong><span>The whole bar represents 1 yuan</span></div><div class="practice-meter" role="progressbar" aria-label="Each correct answer lights one cell" aria-valuemin="0" aria-valuemax="10" aria-valuenow="${lit}">${Array.from({length:10}, (_, i) => `<span class="practice-cell${i < lit ? ' is-lit' : ''}" aria-hidden="true"></span>`).join('')}</div><p class="practice-note">Each cell is 0.1 yuan, or 1 jiao. Each correct answer lights one cell.</p></section>`;
     }
     function diagram(question) {
       if (!question.diagram) return '';
       const amount = question.diagram.amount;
       if (question.diagram.type !== 'money' || !Number.isInteger(amount) || amount < 1 || amount > 9) {
-        throw new TypeError('练习图示必须是一条十等分的单位条。');
+        throw new TypeError('A practice diagram must be one bar divided into ten equal parts.');
       }
-      return `<figure class="practice-diagram"><figcaption>整条代表1元，平均分成10份；每格是0.1元。</figcaption><div class="money-bar" role="list" aria-label="1元单位条，请观察哪些格子涂色">${Array.from({length:10}, (_, i) => `<span class="tenth${i < amount ? ' filled' : ''}" role="listitem" aria-label="第${i+1}格，${i < amount ? '已涂色' : '未涂色'}"></span>`).join('')}</div></figure>`;
+      return `<figure class="practice-diagram"><figcaption>The whole bar represents 1 yuan. It has 10 equal cells. Each cell is 0.1 yuan.</figcaption><div class="money-bar" role="list" aria-label="A 1-yuan bar. Look at the shaded cells.">${Array.from({length:10}, (_, i) => `<span class="tenth${i < amount ? ' filled' : ''}" role="listitem" aria-label="Cell ${i+1}, ${i < amount ? 'shaded' : 'not shaded'}"></span>`).join('')}</div></figure>`;
     }
     function feedback(question, record) {
       if (!record.feedback) return '';
       if (record.feedback === 'hint') {
-        return `<div class="practice-feedback is-hint" role="status"><strong>再想一想，还可以选一次。</strong><p>${escapeHTML(question.hint)}</p></div>`;
+        return `<div class="practice-feedback is-hint" role="status"><strong>Think again. You can try once more.</strong><p>${escapeHTML(question.hint)}</p></div>`;
       }
       if (record.correct) {
-        return `<div class="practice-feedback is-correct" role="status"><strong>对！这一格点亮了。</strong><p>${escapeHTML(question.explanation)}</p></div>`;
+        return `<div class="practice-feedback is-correct" role="status"><strong>Correct! One more cell is lit.</strong><p>${escapeHTML(question.explanation)}</p></div>`;
       }
-      return `<div class="practice-feedback is-reveal" role="status"><strong>一起核对：${escapeHTML(correctOption(question).text)}</strong><p>${escapeHTML(question.explanation)}</p><p class="practice-note">这道题的格子暂时没有点亮。看懂解释，再继续练习。</p></div>`;
+      return `<div class="practice-feedback is-reveal" role="status"><strong>Let us check: ${escapeHTML(correctOption(question).text)}</strong><p>${escapeHTML(question.explanation)}</p><p class="practice-note">This cell is not lit yet. Read the explanation, then continue.</p></div>`;
     }
     function guide() {
-      if (finished) return correctCount() === questions.length ? '你集满了1元！十个0.1元合起来是1元。再回顾一下，小数怎样帮助我们解释数量、比较价钱和联系生活。' : '还有一些格子等你点亮。先回顾解释，再从第一题试一试。';
+      if (finished) return correctCount() === questions.length ? 'You completed a 1-yuan bar! Ten 0.1-yuan parts make 1 yuan. Let us review how decimals help us describe quantities, compare prices and explain everyday examples.' : 'Some cells are still waiting to be lit. Read the explanations, then try again from the first question.';
       const question = questions[index];
       const record = records[index];
-      if (record.feedback === 'hint') return `再想一想，还可以选一次。${question.hint}`;
-      if (record.feedback === 'correct') return `对！${question.explanation}`;
-      if (record.feedback === 'reveal') return `一起核对：${correctOption(question).text}。${question.explanation}`;
-      return '先读题、想清楚，再选择。需要时可以回到课堂看看图示。';
+      if (record.feedback === 'hint') return `Think again. You can try once more. ${question.hint}`;
+      if (record.feedback === 'correct') return `Correct! ${question.explanation}`;
+      if (record.feedback === 'reveal') return `Let us check: ${correctOption(question).text}. ${question.explanation}`;
+      return 'Read, think, then choose. You can return to the lesson to look at the diagrams.';
     }
     function render() {
-      const note = '<p class="practice-note practice-privacy">刷新会重新开始。不输入姓名，不记录成绩。</p>';
+      const note = '<p class="practice-note practice-privacy">Refreshing starts again. No names or results are saved.</p>';
       if (finished) {
         const complete = correctCount() === questions.length;
-        return `<section id="practice-stage" class="stage-card practice-card practice-summary"><header class="practice-header"><p class="eyebrow">课后练习 · 一起回顾</p><h2 id="practice-question-title" tabindex="-1" class="practice-summary-title">${complete ? '你集满了1元' : '还有一些格子等你点亮'}</h2><p class="practice-summary-note">${complete ? '十个0.1元，也就是十个1角，合起来正好是1元。' : '没有点亮的格子，表示对应题目还可以再练一练。先回顾解释，再试一次。'}</p></header>${progress()}<div class="practice-reviews">${groups.map((group) => `<article class="practice-review"><h3>${escapeHTML(group.title)}</h3><p>${escapeHTML(group.review)}</p></article>`).join('')}</div>${note}<div class="practice-actions"><button type="button" class="primary-button" data-action="practice-reset">再练一次</button><button type="button" class="secondary-button" data-action="step" data-value="1">回到课堂看看</button></div></section>`;
+        return `<section id="practice-stage" class="stage-card practice-card practice-summary"><header class="practice-header"><p class="eyebrow">Practice · Let us review</p><h2 id="practice-question-title" tabindex="-1" class="practice-summary-title">${complete ? 'You completed a 1-yuan bar!' : 'Some cells are waiting to be lit'}</h2><p class="practice-summary-note">${complete ? 'Ten 0.1-yuan parts, or ten 1-jiao parts, make exactly 1 yuan.' : 'An unlit cell shows a question to practise again. Read the explanation, then have another try.'}</p></header>${progress()}<div class="practice-reviews">${groups.map((group) => `<article class="practice-review"><h3>${escapeHTML(group.title)}</h3><p>${escapeHTML(group.review)}</p></article>`).join('')}</div>${note}<div class="practice-actions"><button type="button" class="primary-button" data-action="practice-reset">Try again</button><button type="button" class="secondary-button" data-action="step" data-value="1">Back to the lesson</button></div></section>`;
       }
       const question = questions[index];
       const record = records[index];
       const group = groups.find((item) => item.id === question.group);
       const options = optionsFor(index);
-      return `<section id="practice-stage" class="stage-card practice-card"><header class="practice-header"><p class="eyebrow">课后练习 · 8–10分钟</p><h2 class="practice-title">再练一练，把小数说清楚。</h2>${note}</header>${progress()}<div class="practice-settings"><label class="practice-shuffle-label"><input type="checkbox" data-action="practice-shuffle"${shuffle ? ' checked' : ''}${started() ? ' disabled' : ''}>打乱选项顺序</label><span class="practice-note">${started() ? '本轮顺序已固定；重新练习时可以调整。' : '默认保持固定顺序，便于一起讲解。'}</span></div><section class="practice-question" aria-labelledby="practice-question-title"><p class="practice-group">${escapeHTML(question.group)}组 · ${escapeHTML(group ? group.title : '')} <span>第${index+1}题 / 共10题</span></p><h3 id="practice-question-title" tabindex="-1" class="practice-question-title">${escapeHTML(question.prompt)}</h3>${diagram(question)}<div class="practice-options" role="group" aria-label="请选择一个答案">${options.map((option) => {
+      return `<section id="practice-stage" class="stage-card practice-card"><header class="practice-header"><p class="eyebrow">After-class practice · 8–10 minutes</p><h2 class="practice-title">Let us practise decimals.</h2>${note}</header>${progress()}<div class="practice-settings"><label class="practice-shuffle-label"><input type="checkbox" data-action="practice-shuffle"${shuffle ? ' checked' : ''}${started() ? ' disabled' : ''}>Shuffle the choices</label><span class="practice-note">${started() ? 'The order is fixed for this round. You can change it when you start again.' : 'Choices stay in order unless you shuffle them.'}</span></div><section class="practice-question" aria-labelledby="practice-question-title"><p class="practice-group">${escapeHTML(group ? group.title : 'Practice')} <span>Question ${index+1} of 10</span></p><h3 id="practice-question-title" tabindex="-1" class="practice-question-title">${escapeHTML(question.prompt)}</h3>${diagram(question)}<div class="practice-options" role="group" aria-label="Choose one answer">${options.map((option) => {
         const selected = record.chosenIds.includes(option.id);
         const correct = record.resolved && option.id === question.correctId;
         const disabled = record.resolved || selected;
         return `<button type="button" class="practice-option${selected ? ' is-selected' : ''}${selected && !correct ? ' is-attempted' : ''}${correct ? ' is-correct' : ''}" data-action="practice-answer" data-value="${escapeHTML(option.id)}"${disabled ? ' disabled' : ''}>${escapeHTML(option.text)}</button>`;
-      }).join('')}</div>${feedback(question, record)}</section><div class="practice-actions"><button type="button" class="primary-button" data-action="practice-next"${record.resolved ? '' : ' disabled'}>${index === questions.length-1 ? '看看我的单位条' : '下一题 →'}</button></div></section>`;
+      }).join('')}</div>${feedback(question, record)}</section><div class="practice-actions"><button type="button" class="primary-button" data-action="practice-next"${record.resolved ? '' : ' disabled'}>${index === questions.length-1 ? 'See my unit bar' : 'Next question →'}</button></div></section>`;
     }
     return Object.freeze({
       get state() {

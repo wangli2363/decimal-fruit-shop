@@ -14,286 +14,427 @@
 
   function requireTenths(value) {
     if (!Number.isSafeInteger(value) || value < 0) {
-      throw new TypeError('金额必须为非负整数角。');
+      throw new TypeError('Amounts must be non-negative whole numbers of jiao.');
     }
     return value;
   }
 
   var content = {
-    fruits: [
-      { id: 'apple', name: '苹果', unit: '袋', prices: { original: 23 } }
+    "fruits": [
+      {
+        "id": "apple",
+        "name": "Apples",
+        "unit": "bag",
+        "prices": {
+          "original": 23
+        }
+      }
     ],
-    presets: [
-      { id: 'original', label: '原价' }
+    "presets": [
+      {
+        "id": "original",
+        "label": "Original price"
+      }
     ],
-    // Amount is in integer jiao. Change only 18 to 29 for the alternative task.
-    // Whole-yuan amounts are intentionally excluded from this transfer activity.
-    transfer: { fruitId: 'orange', name: '橙子', unit: '袋', amount: 18 },
-    tasks: {
-      1: {
-        title: '说清价钱',
-        subtitle: '把价格、单位条和元角联系起来',
-        opening: '欢迎来水果铺！先看看这张价格牌，你能说说 {price} 元表示多少钱吗？',
-        hint: '先看有几个完整的 1 元，再看不足 1 元的部分。',
-        answer: '{price} 元是 {whole} 元 {tenths} 角，也就是 {whole} 个 1 元加 {tenths} 个 0.1 元。每条单位条代表 1 元，十等分后每小格是 0.1 元，也就是 1 角。',
-        questions: {
-          basic: [
+    "transfer": {
+      "fruitId": "orange",
+      "name": "Oranges",
+      "unit": "bag",
+      "amount": 18
+    },
+    "tasks": {
+      "1": {
+        "title": "Explain the price",
+        "subtitle": "Connect the price, unit bars, yuan and jiao",
+        "opening": "Welcome to the fruit shop! Look at this price tag. Can you explain how much {price} yuan is?",
+        "hint": "First count the whole yuan. Then look at the part smaller than 1 yuan.",
+        "answer": "{price} yuan is {whole} yuan and {tenths} jiao: {whole} lots of 1 yuan plus {tenths} lots of 0.1 yuan. Each unit bar represents 1 yuan. It has ten equal cells, so each cell is 0.1 yuan, or 1 jiao.",
+        "questions": {
+          "basic": [
             {
-              q: '0.1 元是多少角？',
-              hint: '看看 1 元的单位条被平均分成了多少份，再想想元和角的关系。',
-              answer: '1 元等于 10 角，平均分成 10 份后，每份是 0.1 元，也就是 1 角。'
+              "q": "How many jiao is 0.1 yuan?",
+              "hint": "Look at how many equal parts make up the 1-yuan bar. Think about yuan and jiao.",
+              "answer": "1 yuan equals 10 jiao. Dividing it into 10 equal parts gives 0.1 yuan, or 1 jiao, in each part."
             },
             {
-              q: '{price} 元里有几个 1 元、几个 0.1 元？',
-              hint: '先数完整的单位条，再数不足 1 元的涂色小格。',
-              answer: '有 {whole} 个 1 元和 {tenths} 个 0.1 元，合起来是 {price} 元。'
+              "q": "How many lots of 1 yuan and 0.1 yuan make {price} yuan?",
+              "hint": "Count the whole bars first. Then count the shaded cells in the part smaller than 1 yuan.",
+              "answer": "There are {whole} lots of 1 yuan and {tenths} lots of 0.1 yuan. Together, they make {price} yuan."
             },
             {
-              q: '这个价钱中，不足 1 元的部分对应几小格？表示多少元？',
-              hint: '先找到每一小格代表的金额，再说涂色部分的金额。',
-              answer: '每小格是 0.1 元，不足 1 元的部分对应 {tenths} 小格，是 0.{tenths} 元，也就是 {tenths} 角。'
+              "q": "How many cells show the part smaller than 1 yuan? How much money is that?",
+              "hint": "Find the value of one cell. Then explain the value of the shaded part.",
+              "answer": "Each cell is 0.1 yuan. The part smaller than 1 yuan has {tenths} cells. It is 0.{tenths} yuan, or {tenths} jiao."
             }
           ],
-          apply: [
+          "apply": [
             {
-              q: '你能把 {price} 元说给一位顾客听吗？',
-              hint: '可以一边指单位条，一边从整元部分说起。',
-              answer: '这袋水果的价格是 {whole} 元 {tenths} 角，写成小数就是 {price} 元。请指着对应的单位条说明。'
+              "q": "Can you explain {price} yuan to a customer?",
+              "hint": "Point to the bars as you explain. Start with the whole yuan.",
+              "answer": "This bag of fruit costs {whole} yuan and {tenths} jiao. Written as a decimal, that is {price} yuan. Point to the matching bars as you explain."
             },
             {
-              q: '怎样用单位条说明 0.{tenths} 元的含义？',
-              hint: '先说整条代表什么，再说每小格代表什么。',
-              answer: '整条代表 1 元，平均分成 10 份，每份是 0.1 元。不足 1 元的部分是 {tenths} 份，即 0.{tenths} 元，也就是 {tenths} 角。读金额时要把角与分的单位说清楚。'
+              "q": "How do the unit bars show 0.{tenths} yuan?",
+              "hint": "Explain what the whole bar represents, then what one cell represents.",
+              "answer": "The whole bar is 1 yuan. It has 10 equal parts, each worth 0.1 yuan. The part smaller than 1 yuan has {tenths} parts: 0.{tenths} yuan, or {tenths} jiao. Say the money unit clearly so that jiao and fen are not confused."
             }
           ],
-          extend: [
+          "extend": [
             {
-              q: '价格牌上的小数在生活里有什么用？',
-              hint: '想想顾客看完价格牌后，能够知道或决定什么。',
-              answer: '价格牌让顾客知道商品的价钱，可以帮助准备付款或比较价格。请结合自己的经历说明。'
+              "q": "How are decimals on price tags useful in daily life?",
+              "hint": "What can a customer find out or decide after reading a price tag?",
+              "answer": "A price tag tells customers how much an item costs. It helps them prepare payment or compare prices. Explain using your own experience."
             },
             {
-              q: '你在哪里见过这样的价格？知道价钱能帮你做什么？',
-              hint: '回想一次买东西的经历，把看到的数和用途一起说出来。',
-              answer: '可以说出商店、超市或其他真实情境中的小数价格，并说明它怎样帮助了解价钱、准备付款或作出选择。不同经历由老师听取和点评。'
+              "q": "Where have you seen a price like this? How does knowing the price help you?",
+              "hint": "Think of a time you went shopping. Say the number you saw and how it helped.",
+              "answer": "Give a decimal price you have seen in a shop, supermarket or another real place. Explain how it helped you understand the cost, prepare payment or make a choice. Your teacher will discuss your example with you."
             }
           ]
         }
       },
-      2: {
-        title: '帮我选一家',
-        subtitle: '比较同样水果的价格，并说出理由',
-        opening: '两家店卖的是同品种、同品质、同样一袋苹果。你想选哪一家？先说说理由。',
-        hint: '先比整元部分，再比角的部分。请把选择的理由说完整。',
-        answer: '两家店的整元部分都是 2 元。3 角比 8 角少，所以 2.3 元小于 2.8 元。买同样一袋苹果，选 2.3 元这家可以少花 5 角钱。',
-        questions: {
-          basic: [
+      "2": {
+        "title": "Choose a shop",
+        "subtitle": "Compare prices for the same fruit and explain your choice",
+        "opening": "Both shops sell the same variety and quality of apples, with the same amount in each bag. Which shop would you choose? Explain your reason first.",
+        "hint": "Compare the whole yuan first, then the jiao. Explain why you chose that shop.",
+        "answer": "Both prices have 2 whole yuan. 3 jiao is less than 8 jiao, so 2.3 yuan is less than 2.8 yuan. For the same bag of apples, choosing the shop charging 2.3 yuan saves 5 jiao.",
+        "questions": {
+          "basic": [
             {
-              q: '2.3 元中的“2”和“3”分别表示什么？',
-              hint: '把元和角分别说清楚，可以回想刚才的单位条。',
-              answer: '“2”表示 2 个 1 元，“3”表示 3 个 0.1 元，也就是 3 角。'
+              "q": "What do the “2” and “3” in 2.3 yuan each represent?",
+              "hint": "Explain the yuan and jiao separately. Think back to the unit bars.",
+              "answer": "The “2” means 2 lots of 1 yuan. The “3” means 3 lots of 0.1 yuan, or 3 jiao."
             },
             {
-              q: '这两个价钱有什么相同的部分？有什么不同的部分？',
-              hint: '先看整元部分，再看不足 1 元的部分。',
-              answer: '整元部分都是 2 元；角的部分分别是 3 角和 8 角。'
+              "q": "What is the same about these two prices? What is different?",
+              "hint": "Look at the whole yuan first, then the part smaller than 1 yuan.",
+              "answer": "Both prices have 2 whole yuan. The jiao parts are 3 jiao and 8 jiao."
             }
           ],
-          apply: [
+          "apply": [
             {
-              q: '2.3 元和 2.8 元，哪家便宜？你是怎么比出来的？',
-              hint: '同样的苹果，先比较整元，再比较角的部分。',
-              answer: '2.3 元这家便宜。两个价钱都是 2 元多，3 角比 8 角少，因此 2.3 元小于 2.8 元。'
+              "q": "Which is cheaper: 2.3 yuan or 2.8 yuan? How did you compare them?",
+              "hint": "For the same apples, compare the whole yuan first, then the jiao.",
+              "answer": "The shop charging 2.3 yuan is cheaper. Both prices are a little more than 2 yuan. 3 jiao is less than 8 jiao, so 2.3 yuan is less than 2.8 yuan."
             },
             {
-              q: '选便宜的这家，能省多少钱？',
-              hint: '整元部分相同，想一想角的部分相差多少，回答时带上单位。',
-              answer: '8 角比 3 角多 5 角，所以买同样一袋苹果可以省 5 角钱。'
+              "q": "How much can you save by choosing the cheaper shop?",
+              "hint": "The whole yuan parts are the same. Find the difference between the jiao parts, and include the unit.",
+              "answer": "8 jiao is 5 jiao more than 3 jiao. You can save 5 jiao on the same bag of apples."
             }
           ],
-          extend: [
+          "extend": [
             {
-              q: '购物时，小数能帮我们做什么决定？',
-              hint: '把价钱和刚才的选择联系起来说。',
-              answer: '在商品品种、品质和数量相同的条件下，小数价格能帮助比较价钱、选择购买地点。'
+              "q": "What decisions can decimals help us make when shopping?",
+              "hint": "Connect the prices with the choice you just made.",
+              "answer": "When the variety, quality and amount are the same, decimal prices help us compare costs and choose where to buy."
             },
             {
-              q: '为什么比较前要确认两袋苹果是同样的？',
-              hint: '看看两家店出售的东西和份量是否一致。',
-              answer: '比较同种、同量、同质量的商品，才能在这个任务中仅依据价钱判断哪家便宜。'
+              "q": "Why should we check that the two bags of apples are the same before comparing prices?",
+              "hint": "Check what each shop sells and how much is in each bag.",
+              "answer": "When the variety, amount and quality are the same, we can use just the price to decide which shop is cheaper in this task."
             }
           ]
         }
       },
-      3: {
-        title: '把小数带回家',
-        subtitle: '认识 0.7 米，再写一个自己的生活例子',
-        opening: '店主想准备一段 0.7 米的丝带。看这条 1 米长的图示，你会从哪里剪？',
-        hint: '先看整条表示多长、平均分成多少份，再找出需要的部分。',
-        answer: '1 米平均分成 10 份，每份是 0.1 米。0.7 米是 7 个 0.1 米，也就是十分之七米。元表示金额，米表示长度，不能把元与米直接比较大小。',
-        questions: {
-          basic: [
+      "3": {
+        "title": "Decimals in daily life",
+        "subtitle": "Explore 0.7 metres, then write your own everyday example",
+        "opening": "Mr Lin needs 0.7 metres of ribbon. Look at this 1-metre strip. Where would you cut it?",
+        "hint": "Check the length of the whole strip and how many equal parts it has. Then find the part you need.",
+        "answer": "1 metre divided into 10 equal parts gives 0.1 metres in each part. 0.7 metres is 7 lots of 0.1 metres, or seven tenths of a metre. Yuan measures money and metres measure length. We cannot compare them directly.",
+        "questions": {
+          "basic": [
             {
-              q: '1 米平均分成 10 份，每份是多少米？',
-              hint: '想一想十等分图中一小格与整条的关系。',
-              answer: '每份是十分之一米，写成小数是 0.1 米。'
+              "q": "If 1 metre is divided into 10 equal parts, how long is each part?",
+              "hint": "Think about how one cell relates to the whole strip with ten equal parts.",
+              "answer": "Each part is one tenth of a metre, written as 0.1 metres."
             },
             {
-              q: '0.7 米对应图上的几小格？这些小格表示多少米？',
-              hint: '先确认每小格的长度，再把需要的小格指出来。',
-              answer: '对应 7 小格。每小格是 0.1 米，7 小格合起来是 0.7 米。'
+              "q": "How many cells show 0.7 metres? What length do they represent?",
+              "hint": "Check the length of one cell first. Then point to the cells you need.",
+              "answer": "7 cells show this length. Each cell is 0.1 metres, so 7 cells make 0.7 metres."
             }
           ],
-          apply: [
+          "apply": [
             {
-              q: '0.7 米有多长？你能在图上指出来吗？',
-              hint: '从起点开始，沿着十等分的图示寻找剪的位置。',
-              answer: '从起点数到第 7 小格的末端，这一段长 0.7 米。'
+              "q": "How long is 0.7 metres? Can you point to it on the strip?",
+              "hint": "Start at zero and use the ten equal parts to find where to cut.",
+              "answer": "Count from the start to the end of the seventh cell. This length is 0.7 metres."
             },
             {
-              q: '知道丝带是 0.7 米，能帮助准备材料的人做什么？',
-              hint: '想想准备丝带时，需要知道哪一项信息。',
-              answer: '它说明需要的长度，可以帮助量出并剪取相应的一段丝带。'
+              "q": "How does knowing the ribbon length is 0.7 metres help someone prepare it?",
+              "hint": "What do you need to know when preparing a piece of ribbon?",
+              "answer": "It tells you the length you need, so you can measure and cut the right piece of ribbon."
             }
           ],
-          extend: [
+          "extend": [
             {
-              q: '生活中你还在哪里见过小数？这个数有什么用？',
-              hint: '想一想除了买东西，小数还会出现在哪里。把数、单位和用途说清楚。',
-              answer: '可以从身高、长度或价签等真实经历中举例，并说明小数帮助了解、测量或判断什么。例子由老师听取和点评。'
+              "q": "Where else have you seen a decimal in daily life? How was it useful?",
+              "hint": "Think beyond shopping. Explain the number, its unit and how it helped you.",
+              "answer": "Give a real example, such as a height, a length or a price. Explain what the decimal helped you understand, measure or decide. Your teacher will discuss your example with you."
             },
             {
-              q: '除了买东西，小数还可以表示什么？',
-              hint: '看看丝带，再回想生活中需要测量的事物。',
-              answer: '小数也可以表示长度，例如以米为单位表示丝带长度或身高。金额与长度的单位不同，不能把元与米直接比较大小。'
+              "q": "What can decimals show besides prices?",
+              "hint": "Look at the ribbon. Think of things you measure in daily life.",
+              "answer": "Decimals can also show length, such as the length of a ribbon or a height in metres. Money and length use different units, so we cannot compare yuan and metres directly."
             }
           ]
         }
       }
     },
-    practice: {
-      shuffleDefault: false,
-      groups: [
-        { id: 'A', title: '说清组成', review: '一条单位条代表1元，每小格是0.1元；先看整元，再看角的部分。' },
-        { id: 'B', title: '比价', review: '比较同品种、同品质、同样一袋的苹果，先比整元，再比角；2.3元比2.8元少5角。' },
-        { id: 'C', title: '长度与生活', review: '0.7米是7个0.1米；说生活例子时，要把数量、单位和用途一起说清楚。' }
+    "practice": {
+      "shuffleDefault": false,
+      "groups": [
+        {
+          "id": "A",
+          "title": "Parts of a price",
+          "review": "One unit bar is 1 yuan. Each cell is 0.1 yuan. Look at the whole yuan first, then the jiao."
+        },
+        {
+          "id": "B",
+          "title": "Comparing prices",
+          "review": "Compare bags of apples with the same variety, quality and amount. Compare whole yuan first, then jiao. 2.3 yuan is 5 jiao less than 2.8 yuan."
+        },
+        {
+          "id": "C",
+          "title": "Length and daily life",
+          "review": "0.7 metres is 7 lots of 0.1 metres. In your everyday example, explain the quantity, unit and purpose."
+        }
       ],
-      questions: [
+      "questions": [
         {
-          id: 'A1', group: 'A', prompt: '0.1 元等于多少角？',
-          options: [
-            { id: 'a', text: '0.1 角' },
-            { id: 'b', text: '1 角' },
-            { id: 'c', text: '10 角' }
+          "id": "A1",
+          "group": "A",
+          "prompt": "How many jiao is 0.1 yuan?",
+          "options": [
+            {
+              "id": "a",
+              "text": "0.1 jiao"
+            },
+            {
+              "id": "b",
+              "text": "1 jiao"
+            },
+            {
+              "id": "c",
+              "text": "10 jiao"
+            }
           ],
-          correctId: 'b',
-          hint: '想一想：1元平均分成10份，每份与“角”有什么关系？',
-          explanation: '1元等于10角，平均分成10份，每份是0.1元，也就是1角。'
+          "correctId": "b",
+          "hint": "Think about 1 yuan divided into 10 equal parts. How does each part relate to jiao?",
+          "explanation": "1 yuan equals 10 jiao. Dividing it into 10 equal parts gives 0.1 yuan, or 1 jiao, in each part."
         },
         {
-          id: 'A2', group: 'A', prompt: '2.3 元里有几个 1 元、几个 0.1 元？',
-          options: [
-            { id: 'a', text: '2 个 1 元、3 个 0.1 元' },
-            { id: 'b', text: '3 个 1 元、2 个 0.1 元' },
-            { id: 'c', text: '2 个 1 元、8 个 0.1 元' }
+          "id": "A2",
+          "group": "A",
+          "prompt": "How many lots of 1 yuan and 0.1 yuan make 2.3 yuan?",
+          "options": [
+            {
+              "id": "a",
+              "text": "2 lots of 1 yuan and 3 lots of 0.1 yuan"
+            },
+            {
+              "id": "b",
+              "text": "3 lots of 1 yuan and 2 lots of 0.1 yuan"
+            },
+            {
+              "id": "c",
+              "text": "2 lots of 1 yuan and 8 lots of 0.1 yuan"
+            }
           ],
-          correctId: 'a',
-          hint: '先看有几个完整的1元，再看不足1元的部分。',
-          explanation: '2.3元是2元3角，也就是2个1元加3个0.1元。'
+          "correctId": "a",
+          "hint": "First count the whole yuan. Then look at the part smaller than 1 yuan.",
+          "explanation": "2.3 yuan is 2 yuan and 3 jiao: 2 lots of 1 yuan plus 3 lots of 0.1 yuan."
         },
         {
-          id: 'A3', group: 'A', prompt: '2.3 元中“3”表示什么？',
-          options: [
-            { id: 'a', text: '3 分' },
-            { id: 'b', text: '3 元' },
-            { id: 'c', text: '3 个 0.1 元，也就是 3 角' }
+          "id": "A3",
+          "group": "A",
+          "prompt": "What does the “3” in 2.3 yuan represent?",
+          "options": [
+            {
+              "id": "a",
+              "text": "3 fen"
+            },
+            {
+              "id": "b",
+              "text": "3 yuan"
+            },
+            {
+              "id": "c",
+              "text": "3 lots of 0.1 yuan, or 3 jiao"
+            }
           ],
-          correctId: 'c',
-          hint: '“3”在小数点后。请回想不足1元的单位条中，每格表示什么。',
-          explanation: '小数点后的“3”表示3个0.1元，也就是3角。'
+          "correctId": "c",
+          "hint": "The “3” is after the decimal point. What does each cell in the part smaller than 1 yuan represent?",
+          "explanation": "The “3” after the decimal point means 3 lots of 0.1 yuan, or 3 jiao."
         },
         {
-          id: 'A4', group: 'A', prompt: '图上涂了几格，表示多少钱？',
-          diagram: { type: 'money', amount: 3 },
-          options: [
-            { id: 'a', text: '3 格，0.3 元' },
-            { id: 'b', text: '7 格，0.7 元' },
-            { id: 'c', text: '3 格，0.1 元' }
+          "id": "A4",
+          "group": "A",
+          "prompt": "How many cells are shaded? How much money do they represent?",
+          "diagram": {
+            "type": "money",
+            "amount": 3
+          },
+          "options": [
+            {
+              "id": "a",
+              "text": "3 cells, 0.3 yuan"
+            },
+            {
+              "id": "b",
+              "text": "7 cells, 0.7 yuan"
+            },
+            {
+              "id": "c",
+              "text": "3 cells, 0.1 yuan"
+            }
           ],
-          correctId: 'a',
-          hint: '只数涂色的小格，再想一想每小格表示多少钱。',
-          explanation: '整条代表1元，平均分成10格，每格是0.1元。涂色3格表示3个0.1元，即0.3元。'
+          "correctId": "a",
+          "hint": "Count only the shaded cells. Then think about the value of each cell.",
+          "explanation": "The whole bar is 1 yuan, divided into 10 equal cells. Each cell is 0.1 yuan. Three shaded cells show 3 lots of 0.1 yuan, or 0.3 yuan."
         },
         {
-          id: 'B1', group: 'B', prompt: '同样一袋苹果，2.3 元和 2.8 元哪个便宜？',
-          options: [
-            { id: 'a', text: '2.8 元' },
-            { id: 'b', text: '一样便宜' },
-            { id: 'c', text: '2.3 元' }
+          "id": "B1",
+          "group": "B",
+          "prompt": "For the same bag of apples, which is cheaper: 2.3 yuan or 2.8 yuan?",
+          "options": [
+            {
+              "id": "a",
+              "text": "2.8 yuan"
+            },
+            {
+              "id": "b",
+              "text": "They cost the same"
+            },
+            {
+              "id": "c",
+              "text": "2.3 yuan"
+            }
           ],
-          correctId: 'c',
-          hint: '两个价钱的整元部分相同，再看角的部分。',
-          explanation: '两个价钱都是2元多，3角比8角少，所以2.3元这家便宜。'
+          "correctId": "c",
+          "hint": "Both prices have the same number of whole yuan. Look at the jiao next.",
+          "explanation": "Both prices are a little more than 2 yuan. 3 jiao is less than 8 jiao, so the shop charging 2.3 yuan is cheaper."
         },
         {
-          id: 'B2', group: 'B', prompt: '买同样一袋苹果，选 2.3 元这家，比 2.8 元这家能省多少？',
-          options: [
-            { id: 'a', text: '3 角' },
-            { id: 'b', text: '5 角' },
-            { id: 'c', text: '8 角' }
+          "id": "B2",
+          "group": "B",
+          "prompt": "For the same bag of apples, how much do you save by paying 2.3 yuan instead of 2.8 yuan?",
+          "options": [
+            {
+              "id": "a",
+              "text": "3 jiao"
+            },
+            {
+              "id": "b",
+              "text": "5 jiao"
+            },
+            {
+              "id": "c",
+              "text": "8 jiao"
+            }
           ],
-          correctId: 'b',
-          hint: '整元部分一样，想一想角的部分相差多少。',
-          explanation: '整元部分都是2元，8角比3角多5角，所以选择2.3元这家能省5角。'
+          "correctId": "b",
+          "hint": "The whole yuan parts are the same. Find the difference between the jiao parts.",
+          "explanation": "Both prices have 2 whole yuan. 8 jiao is 5 jiao more than 3 jiao, so choosing the shop charging 2.3 yuan saves 5 jiao."
         },
         {
-          id: 'B3', group: 'B', prompt: '比较两家水果价钱前，必须先确认什么？',
-          options: [
-            { id: 'a', text: '水果同品种、同品质、同样一袋' },
-            { id: 'b', text: '装水果的袋子颜色一样' },
-            { id: 'c', text: '两家店的招牌一样大' }
+          "id": "B3",
+          "group": "B",
+          "prompt": "What must we check before comparing the two fruit prices?",
+          "options": [
+            {
+              "id": "a",
+              "text": "The same variety, quality and amount of fruit in each bag"
+            },
+            {
+              "id": "b",
+              "text": "The bags are the same colour"
+            },
+            {
+              "id": "c",
+              "text": "The shop signs are the same size"
+            }
           ],
-          correctId: 'a',
-          hint: '看看两家卖的水果是否可以放在一起公平地比较。',
-          explanation: '先确认同品种、同品质、同样一袋，才能在这个任务中只根据价钱选择。'
+          "correctId": "a",
+          "hint": "Can we compare what the two shops sell fairly?",
+          "explanation": "Check that both bags have the same variety, quality and amount of fruit. Then we can choose using only the price in this task."
         },
         {
-          id: 'C1', group: 'C', prompt: '0.7 米是几个 0.1 米？',
-          options: [
-            { id: 'a', text: '1 个' },
-            { id: 'b', text: '10 个' },
-            { id: 'c', text: '7 个' }
+          "id": "C1",
+          "group": "C",
+          "prompt": "How many lots of 0.1 metres make 0.7 metres?",
+          "options": [
+            {
+              "id": "a",
+              "text": "1"
+            },
+            {
+              "id": "b",
+              "text": "10"
+            },
+            {
+              "id": "c",
+              "text": "7"
+            }
           ],
-          correctId: 'c',
-          hint: '回想1米十等分的丝带图：每小格表示0.1米。',
-          explanation: '0.7米是7个0.1米，对应1米十等分图中的7小格。'
+          "correctId": "c",
+          "hint": "Think of the 1-metre ribbon divided into ten equal parts. Each cell is 0.1 metres.",
+          "explanation": "0.7 metres is 7 lots of 0.1 metres. It covers 7 cells of the 1-metre strip divided into ten equal parts."
         },
         {
-          id: 'C2', group: 'C', prompt: '下面哪句话是对的？',
-          options: [
-            { id: 'a', text: '元表示金额，米表示长度，不能直接比大小。' },
-            { id: 'b', text: '2.3元比0.7米大。' },
-            { id: 'c', text: '只要都写成小数，不同单位也能直接比大小。' }
+          "id": "C2",
+          "group": "C",
+          "prompt": "Which statement is correct?",
+          "options": [
+            {
+              "id": "a",
+              "text": "Yuan measures money and metres measure length. We cannot compare them directly."
+            },
+            {
+              "id": "b",
+              "text": "2.3 yuan is greater than 0.7 metres."
+            },
+            {
+              "id": "c",
+              "text": "We can directly compare different units as long as the numbers are decimals."
+            }
           ],
-          correctId: 'a',
-          hint: '先看单位：这两个数表示的是同一种量吗？',
-          explanation: '元表示金额，米表示长度；表示不同种类的量时，不能把数值直接比较大小。'
+          "correctId": "a",
+          "hint": "Look at the units first. Do the two numbers describe the same kind of quantity?",
+          "explanation": "Yuan measures money and metres measure length. We cannot directly compare the numbers when they describe different kinds of quantity."
         },
         {
-          id: 'C3', group: 'C', prompt: '哪个生活例子把“数量、单位和用途”说清楚了？',
-          options: [
-            { id: 'a', text: '我看见丝带上写着0.7。' },
-            { id: 'b', text: '我买了一袋苹果。' },
-            { id: 'c', text: '0.7米是一个小数。' },
-            { id: 'd', text: '做蝴蝶结要0.7米丝带，知道长度能帮助我剪取合适的一段。' }
+          "id": "C3",
+          "group": "C",
+          "prompt": "Which everyday example explains the quantity, unit and purpose?",
+          "options": [
+            {
+              "id": "a",
+              "text": "I saw 0.7 written on a ribbon."
+            },
+            {
+              "id": "b",
+              "text": "I bought a bag of apples."
+            },
+            {
+              "id": "c",
+              "text": "0.7 metres is a decimal."
+            },
+            {
+              "id": "d",
+              "text": "I need 0.7 metres of ribbon for a bow. Knowing the length helps me cut the right piece."
+            }
           ],
-          correctId: 'd',
-          hint: '先找数量和单位，再看有没有说明这个数能帮忙做什么。',
-          explanation: '“0.7米”说明丝带的长度，“帮助剪取合适的一段”说明用途，数量、单位和用途都说清楚了。'
+          "correctId": "d",
+          "hint": "Find the quantity and unit first. Then check whether the example explains how the number helps.",
+          "explanation": "“0.7 metres” gives the ribbon length. “Cut the right piece” explains its purpose. The quantity, unit and purpose are all clear."
         }
       ]
     },
-    fallback: '这个问题我们先问问老师，或者看看图示。'
+    "fallback": "Let us ask the teacher or look at the diagram together."
   };
 
   root.FRUIT_CONTENT = deepFreeze(content);
@@ -315,10 +456,10 @@
     composition: function (value) {
       requireTenths(value);
       var whole = Math.floor(value / 10), tenths = value % 10;
-      if (tenths === 0) return '正好 ' + whole + ' 元，没有不足 1 元的部分';
+      if (tenths === 0) return 'Exactly ' + whole + ' yuan, with no part smaller than 1 yuan.';
       var price = whole + '.' + tenths;
-      if (whole === 0) return price + ' 元是 ' + tenths + ' 角，也就是 ' + tenths + ' 个 0.1 元。';
-      return price + ' 元是 ' + whole + ' 元 ' + tenths + ' 角，也就是 ' + whole + ' 个 1 元加 ' + tenths + ' 个 0.1 元。';
+      if (whole === 0) return price + ' yuan is ' + tenths + ' jiao: ' + tenths + (tenths === 1 ? ' lot' : ' lots') + ' of 0.1 yuan.';
+      return price + ' yuan is ' + whole + ' yuan and ' + tenths + ' jiao: ' + whole + (whole === 1 ? ' lot' : ' lots') + ' of 1 yuan plus ' + tenths + (tenths === 1 ? ' lot' : ' lots') + ' of 0.1 yuan.';
     },
     escapeHTML: function (value) {
       return String(value).replace(/[&<>"']/g, function (character) {

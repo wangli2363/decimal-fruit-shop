@@ -604,3 +604,24 @@ button { min-width: 44px; min-height: 44px !important; }
   .summary-actions button { flex: 1 1 100%; }
   .teacher-content th:first-child { width: 36%; }
 }
+
+/* English copy uses more horizontal space while keeping the classroom visual style. */
+html[lang="en"] .brand-mark { flex-shrink: 0; }
+html[lang="en"] .brand-copy { min-width: 0; }
+html[lang="en"] .brand-copy small { letter-spacing: .025em; }
+html[lang="en"] .step-label { white-space: normal; line-height: 1.4; }
+html[lang="en"] .step-tab:first-child .step-number { width: auto; padding: 0 6px; border-radius: 8px; }
+html[lang="en"] .intro-title { letter-spacing: -.015em; }
+html[lang="en"] .bar-row { width: min(100%, 280px); }
+html[lang="en"] .bar-row .bar-label { flex-basis: 48px; white-space: nowrap; }
+html[lang="en"] .unit-label { display: block; }
+html[lang="en"] .difference-row { grid-template-columns: 120px minmax(0, 1fr); }
+html[lang="en"] .question-heading { flex-wrap: wrap; }
+html[lang="en"] .practice-meter-label { display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 10px; margin-bottom: 8px; }
+@media (max-width: 720px) {
+  html[lang="en"] .step-tab { padding: 9px 4px; gap: 5px; }
+  html[lang="en"] .step-label { overflow-wrap: normal; font-size: 11px; }
+  html[lang="en"] .difference-row { grid-template-columns: 86px minmax(0, 1fr); gap: 7px; }
+  html[lang="en"] .brand-copy small { font-size: 10px; letter-spacing: 0; }
+  html[lang="en"] .shop-label { font-size: 16px; }
+}

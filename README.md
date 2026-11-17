@@ -1,16 +1,18 @@
-# 小数水果铺
+# Decimal Fruit Shop
 
-面向小学三年级的一位小数教学资源：20分钟课堂＋8–10分钟课后练习。
+An English classroom resource for Grade 3 pupils learning one-place decimals: a 20-minute teacher-led lesson segment and optional 8–10-minute practice.
 
-公开使用：https://wangli2363.github.io/decimal-fruit-shop/
+Open without an account: https://wangli2363.github.io/decimal-fruit-shop/
 
-- 任务一：用十等分单位条解释2.3元，逐步撤去图示。教师可开启一次1.8元橙子的迁移任务，默认关闭。
-- 任务二：比较同品种、同品质、同样一袋苹果的2.3元与2.8元，核对后用3格与8格显示相差5角。
-- 任务三：解释0.7米，并分享包含数量、单位和用途的生活例子。课堂解释由教师与同学讨论。
-- 第五步：固定十道单选练习，第一次未答对先给提示，第二次才揭示答案。只有答对才点亮一格，十题全答对才集满1元，可重练。
+- Task 1: explain 2.3 yuan with ten-part unit bars, then gradually hide the visual support. An optional 1.8-yuan orange challenge is off by default.
+- Task 2: compare 2.3 and 2.8 yuan for apples of the same variety, quality and amount. Pupils explain before the teacher reveals the 5-jiao saving and comparison bars.
+- Task 3: interpret 0.7 metres and give an everyday decimal example with its unit and purpose. The teacher discusses open explanations.
+- Practice: ten fixed questions. The first unsuccessful choice receives a hint and one retry. Only correct answers light a cell. All ten correct answers complete a 1-yuan bar.
 
-没有账号、后台、CDN或实时AI。输入与练习状态仅存在页面内存，不上传、不写入浏览器持久存储，刷新会重新开始。朗读仅选择设备提供的本地中文语音，无可用语音时保留字幕。
+All navigation, prompts, teacher tools, practice, feedback and read-aloud text are in English. The mathematics keeps Chinese money units: 1 yuan = 10 jiao; 0.1 yuan = 1 jiao. Read-aloud uses only an available local English voice and falls back to the on-screen text.
 
-`index.html`已包含样式、题库、交互和SVG插图，下载后可直接离线打开；在线首次加载只需网页文档，加载后交互不发起网络请求。其余CSS/JS文件保留作源代码参考，部署页面不另外加载它们。修改这些源码后需重新生成内联HTML，保持一致。
+No account, backend, CDN, live AI or stored pupil responses. Examples and practice state remain in page memory and reset on refresh. The self-contained `index.html` includes styles, scripts and SVG illustrations. Save it before going offline to use it without a connection. Classroom and practice interactions make no network requests after loading.
 
-网站使用GitHub Pages的main分支根目录发布。页面与素材由AI辅助制作，固定内容由教师审阅；功能检查不等于实际学习成效证据。
+The separate CSS and JavaScript files are source references. The deployed page does not request them. Regenerate the inline HTML whenever these sources change. GitHub Pages publishes from the root of `main`.
+
+The prototype was developed with AI assistance. Functional checks establish behaviour, not pupil learning outcomes. Final teacher review and classroom evaluation remain separate steps.
